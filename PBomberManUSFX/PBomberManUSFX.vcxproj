@@ -139,16 +139,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bomba.cpp" />
     <ClCompile Include="Bomber.cpp" />
+    <ClCompile Include="Detonador.cpp" />
     <ClCompile Include="Enemigo.cpp" />
     <ClCompile Include="Explosion.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="Muro.cpp" />
     <ClCompile Include="principal.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bomba.h" />
     <ClInclude Include="Bomber.h" />
+    <ClInclude Include="Detonador.h" />
     <ClInclude Include="Enemigo.h" />
     <ClInclude Include="Explosion.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="Muro.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

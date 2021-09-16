@@ -1,10 +1,10 @@
 #pragma once
-class Muro
+class Item
 {
 private:
 	int posicionX;
 	int posicionY;
-	bool destruible;
+	int tiempoVisible;
 
 public:
 	int getPosicionX() { return posicionX; }
@@ -13,10 +13,9 @@ public:
 	int getPosicionY() { return posicionY; }
 	void setPosicionY(int _posicionY) { posicionY = _posicionY; }
 
-	bool getDestruible() { return destruible; }
-	void setDestruible(int _destruible) { destruible = _destruible; }
-	
-	void destruir();
+	int getTiempoVisible() { return tiempoVisible; }
+	void setTiempoVisible(int _tiempoVisible) { tiempoVisible = _tiempoVisible; }
 
+	void visible();
 };
 
