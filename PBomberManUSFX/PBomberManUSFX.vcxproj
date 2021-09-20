@@ -144,6 +144,9 @@
     <ClCompile Include="Detonador.cpp" />
     <ClCompile Include="Enemigo.cpp" />
     <ClCompile Include="Explosion.cpp" />
+    <ClCompile Include="GameActor.cpp" />
+    <ClCompile Include="GameDirection.h" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Muro.cpp" />
     <ClCompile Include="principal.cpp" />
@@ -154,6 +157,8 @@
     <ClInclude Include="Detonador.h" />
     <ClInclude Include="Enemigo.h" />
     <ClInclude Include="Explosion.h" />
+    <ClInclude Include="GameActor.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Muro.h" />
   </ItemGroup>
