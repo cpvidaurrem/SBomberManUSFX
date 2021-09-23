@@ -17,14 +17,6 @@ Bomber::Bomber(int _anchoAvatar, int _altoAvatar, int _numeroVidas)
 	mostrarInformacion();
 }
 
-void Bomber::Morir()
-{
-}
-
-void Bomber::Correr()
-{
-}
-
 void Bomber::colocarBomba()
 {
 }
