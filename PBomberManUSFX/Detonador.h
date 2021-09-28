@@ -1,5 +1,5 @@
 #pragma once
-#include <iostream>
+#include<iostream>
 
 class Detonador
 {
@@ -10,7 +10,6 @@ private:
 
 	bool activado;
 	bool ejecutado;
-
 public:
 	int getHoras() { return horas; }
 	void setHoras(int _horas) { horas = _horas; }
@@ -20,6 +19,7 @@ public:
 
 	int getSegundos() { return segundos; }
 	void setSegundos(int _segundos) { segundos = _segundos; }
+
 
 	bool getActivado() { return activado; }
 	void setActivado(bool _activado) { activado = _activado; }
@@ -31,3 +31,4 @@ public:
 	void ReducirTiempo();
 	void MostrarTiempoRestante();
 };
+
