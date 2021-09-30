@@ -3,11 +3,12 @@
 #include "GameActor.h"
 
 using namespace std;
-class Muro : public GameActor
+
+class MuroMetalico : public GameActor
 {
 private:
 
 public:
-	Muro(Texture* textura);
+    MuroMetalico(Texture* textura);
 };
 

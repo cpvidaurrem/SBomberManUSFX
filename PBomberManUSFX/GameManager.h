@@ -10,6 +10,7 @@
 #include "Bomber.h"
 #include "Enemigo.h"
 #include "Explosion.h"
+#include "MuroMetalico.h"
 
 using namespace std;
 
@@ -42,6 +43,11 @@ private:
     Texture* texturaExplosion3;
     Texture* texturaExplosion4;
     Texture* texturaExplosion5;
+    
+    Texture* texturaMuroMetalico;
+
+    vector<GameObject*> actoresJuego;
+    vector<MuroMetalico*> muros;
 
 public:
     GameManager();

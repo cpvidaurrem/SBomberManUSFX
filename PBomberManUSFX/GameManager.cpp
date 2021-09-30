@@ -18,11 +18,13 @@ GameManager::GameManager() {
 	texturaExplosion3 = nullptr;
 	texturaExplosion4 = nullptr;
 	texturaExplosion5 = nullptr;
+
+	texturaMuroMetalico = nullptr;
 }
 
 bool GameManager::onInit() {
 
-	//Initialization flag
+	//Bandera de inicialización
 	bool success = true;
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) 
@@ -32,7 +34,7 @@ bool GameManager::onInit() {
 	}
 	else
 	{
-		//Create window
+		//Crear ventana
 		gWindow = SDL_CreateWindow("Bomber Man USFX", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 		if (gWindow == nullptr)
 		{
@@ -42,7 +44,7 @@ bool GameManager::onInit() {
 		else
 		{
 
-			////Create vsynced renderer for window
+			//Crear un renderizador sincronizado para la ventana
 			gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 			if (gRenderer == nullptr)
 			{
@@ -51,10 +53,10 @@ bool GameManager::onInit() {
 			}
 			else
 			{
-				//Initialize renderer color
+				//Inicializar el color del renderizador
 				SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
-				//Initialize PNG loading
+				//Inicializar carga PNG
 				int imgFlags = IMG_INIT_PNG;
 				if (!(IMG_Init(imgFlags) & imgFlags))
 				{
@@ -70,10 +72,10 @@ bool GameManager::onInit() {
 
 bool GameManager::loadMedia()
 {
-	//Loading success flag
+	//Cargando bandera de éxito
 	bool success = true;
 
-	//Load PNG texture
+	//Cargar textura PNG
 	gTexture = loadTexture("texture.png");
 	if (gTexture == NULL)
 	{
@@ -87,17 +89,17 @@ bool GameManager::loadMedia()
 
 void GameManager::close()
 {
-	//Free loaded image
+	//liberando imagen cargada
 	SDL_DestroyTexture(gTexture);
 	gTexture = nullptr;
 
-	//Destroy window	
+	//Destruir ventana
 	SDL_DestroyRenderer(gRenderer);
 	SDL_DestroyWindow(gWindow);
 	gWindow = nullptr;
 	gRenderer = nullptr;
 
-	//Quit SDL subsystems
+	//Salir de los subsistemas de SDL
 	IMG_Quit();
 	SDL_Quit();
 }
@@ -110,16 +112,16 @@ int GameManager::onExecute() {
 	}
 	else
 	{
-			//Main loop flag
+			//Bandera de bucle principal
 			bool quit = false;
 
-			//Event handler
+			//Controlador de eventos
 			SDL_Event event;
 
 			texturaBomber1 = new Texture(gRenderer);
 			texturaBomber1->loadFromImage("resources/bomber.bmp");
-			//texturaBomber2 = new Texture(gRenderer);
-			//texturaBomber2->loadFromImage("resources/textures.bmp");
+			texturaBomber2 = new Texture(gRenderer);
+			texturaBomber2->loadFromImage("resources/textures.bmp");
 
 			texturaEnemigo = new Texture(gRenderer);
 			texturaEnemigo->loadFromImage("resources/textures.bmp");
@@ -143,8 +145,11 @@ int GameManager::onExecute() {
 			texturaExplosion5 = new Texture(gRenderer);
 			texturaExplosion5->loadFromImage("resources/textures.bmp");
 
+			texturaMuroMetalico = new Texture(gRenderer);
+			texturaMuroMetalico->loadFromImage("resources/textures.bmp");
+
 			Bomber* b1 = new Bomber(texturaBomber1);
-			//Bomber* b2 = new Bomber(texturaBomber2);
+			Bomber* b2 = new Bomber(texturaBomber2);
 
 			Enemigo* e = new Enemigo(texturaEnemigo);
 			Enemigo* e2 = new Enemigo(texturaEnemigo);
@@ -158,15 +163,27 @@ int GameManager::onExecute() {
 			Explosion* ex4 = new Explosion(texturaExplosion4);
 			Explosion* ex5 = new Explosion(texturaExplosion5);
 
+			for (int i = 0; i < 128; i++) {
+				MuroMetalico* mm = new MuroMetalico(texturaMuroMetalico);
+				mm->setImagenX(966);
+				mm->setImagenY(0);
+				mm->setAncho(25);
+				mm->setAlto(25);
+
+				actoresJuego.push_back(mm);
+				mm = nullptr;
+			}
+			//MuroMetalico* mm = new MuroMetalico(texturaMuroMetalico);
+
 			b1->setImagenX(3);
 			b1->setImagenY(4);
 			b1->setAncho(18);
 			b1->setAlto(32);
 
-			/*b2->setImagenX(570);
-			b2->setImagenY(3);
-			b2->setAncho(30);
-			b2->setAlto(35);*/
+			b2->setImagenX(571);
+			b2->setImagenY(4);
+			b2->setAncho(18);
+			b2->setAlto(32);
 
 			e->setImagenX(0);
 			e->setImagenY(160);
@@ -210,13 +227,35 @@ int GameManager::onExecute() {
 			ex5->setAncho(24);
 			ex5->setAlto(24);
 
-			//While application is running
+			/*mm->setImagenX(966);
+			mm->setImagenY(0);
+			mm->setAncho(24);
+			mm->setAlto(24);*/
+
+			actoresJuego.push_back(b1);
+			actoresJuego.push_back(b2);
+
+			actoresJuego.push_back(e);
+			actoresJuego.push_back(e2);
+			actoresJuego.push_back(e3);
+			actoresJuego.push_back(e4);
+			actoresJuego.push_back(e5);
+
+			actoresJuego.push_back(ex);
+			actoresJuego.push_back(ex2);
+			actoresJuego.push_back(ex3);
+			actoresJuego.push_back(ex4);
+			actoresJuego.push_back(ex5);
+
+			/*actoresJuego.push_back(mm);*/
+
+			//Mientras la aplicación se está ejecutando
 			while (!quit)
 			{
-				//Handle events on queue
+				//Manejar eventos en cola
 				while (SDL_PollEvent(&event) != 0)
 				{
-					//User requests quit
+					//El usuario solicita salir
 					if (event.type == SDL_QUIT)
 					{
 						quit = true;
@@ -234,47 +273,99 @@ int GameManager::onExecute() {
 				SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 				SDL_RenderClear(gRenderer);
 
-				//Update screen
+				//Actualizar pantalla
 
 				/*onLoop();
 				onRender();*/
-				b1->render();
+				//b1->render();
 				//b2->setPosicionX(rand() % SCREEN_WIDTH);
 				//b2->setPosicionY(rand() % SCREEN_HEIGHT);
 
+				b1->setPosicionX(0);
+				b1->setPosicionY(28);
+
+				b2->setPosicionX(24+4);
+				b2->setPosicionY(28);
 				//b2->render();
+				
 
 				e->setPosicionX(400);
 				e->setPosicionY(300);
-				e->render();
+				//e->render();
 				e2->setPosicionX(400+24+4);
 				e2->setPosicionY(300);
-				e2->render();
+				//e2->render();
 				e3->setPosicionX(400+48+8);
 				e3->setPosicionY(300);
-				e3->render();
+				//e3->render();
 				e4->setPosicionX(400+72+12);
 				e4->setPosicionY(300);
-				e4->render();
+				//e4->render();
 				e5->setPosicionX(400+96+16);
 				e5->setPosicionY(300);
-				e5->render();
+				//e5->render();
 
 				ex->setPosicionX(400);
 				ex->setPosicionY(0);
-				ex->render();
+				//ex->render();
 				ex2->setPosicionX(400+24+4);
 				ex2->setPosicionY(0);
-				ex2->render();
+				//ex2->render();
 				ex3->setPosicionX(400+48+8);
 				ex3->setPosicionY(0);
-				ex3->render();
+				//ex3->render();
 				ex4->setPosicionX(400+72+12);
 				ex4->setPosicionY(0);
-				ex4->render();
+				//ex4->render();
 				ex5->setPosicionX(400+96+16);
 				ex5->setPosicionY(0);
-				ex5->render();
+				//ex5->render();
+
+				/*mm->setPosicionX(0);
+				mm->setPosicionY(348);*/
+
+				//Muros contorno Arriba
+				int pX = 0;
+				int pY = 0;
+				for (int i = 0; i < 32; i++) {
+					((GameActor*)actoresJuego[i])->setPosicionX(pX);
+					((GameActor*)actoresJuego[i])->setPosicionY(0);
+
+					pX += 25;
+				}
+
+				//Muros contorno Abajo
+				pX = 0;
+				for (int i = 32; i < 64; i++) {
+					((GameActor*)actoresJuego[i])->setPosicionX(pX);
+					((GameActor*)actoresJuego[i])->setPosicionY(575);
+
+					pX += 25;
+				}
+
+				//Muros contorno Izquierda
+				for (int i = 64; i < 96; i++) {
+					((GameActor*)actoresJuego[i])->setPosicionX(0);
+					((GameActor*)actoresJuego[i])->setPosicionY(pY);
+
+					pY += 25;
+				}
+
+				//Muros contorno Derecha
+				pY = 0;
+				for (int i = 96; i < 128; i++) {
+					((GameActor*)actoresJuego[i])->setPosicionX(775);
+					((GameActor*)actoresJuego[i])->setPosicionY(pY);
+
+					pY += 25;
+				}
+
+				for (int i = 0; i < actoresJuego.size(); i++) {
+					/*((GameActor*)actoresJuego[i])->setPosicionX(rand() % SCREEN_WIDTH);
+					((GameActor*)actoresJuego[i])->setPosicionY(rand() % SCREEN_HEIGHT);*/
+
+					actoresJuego[i]->render();
+				}
 
 				SDL_RenderPresent(gRenderer);
 			}
