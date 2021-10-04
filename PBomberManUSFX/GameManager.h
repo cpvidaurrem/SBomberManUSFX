@@ -47,7 +47,7 @@ private:
     Texture* texturaMuroMetalico;
 
     vector<GameObject*> actoresJuego;
-    vector<MuroMetalico*> muros;
+    
 
 public:
     GameManager();

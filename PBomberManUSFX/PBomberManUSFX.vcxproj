@@ -152,9 +152,12 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="MapGenerator.cpp" />
     <ClCompile Include="Muro.cpp" />
+    <ClCompile Include="MuroCeramica.cpp" />
     <ClCompile Include="MuroMetalico.cpp" />
     <ClCompile Include="principal.cpp" />
+    <ClCompile Include="SueloCesped.cpp" />
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -167,8 +170,11 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="MapGenerator.h" />
     <ClInclude Include="Muro.h" />
+    <ClInclude Include="MuroCeramica.h" />
     <ClInclude Include="MuroMetalico.h" />
+    <ClInclude Include="SueloCesped.h" />
     <ClInclude Include="Texture.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

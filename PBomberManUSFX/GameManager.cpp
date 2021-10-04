@@ -118,36 +118,39 @@ int GameManager::onExecute() {
 			//Controlador de eventos
 			SDL_Event event;
 
-			texturaBomber1 = new Texture(gRenderer);
+			
+
+			texturaBomber1 = new Texture(/*gRenderer*/);
+			texturaBomber2 = new Texture();
+			texturaEnemigo = new Texture();
+			texturaEnemigo2 = new Texture();
+			texturaEnemigo3 = new Texture();
+			texturaEnemigo4 = new Texture();
+			texturaEnemigo5 = new Texture();
+			texturaExplosion = new Texture();
+			texturaExplosion2 = new Texture();
+			texturaExplosion3 = new Texture();
+			texturaExplosion4 = new Texture();
+			texturaExplosion5 = new Texture();
+			texturaMuroMetalico = new Texture();
+
+			Texture::renderer = gRenderer;
+
 			texturaBomber1->loadFromImage("resources/bomber.bmp");
-			texturaBomber2 = new Texture(gRenderer);
 			texturaBomber2->loadFromImage("resources/textures.bmp");
-
-			texturaEnemigo = new Texture(gRenderer);
 			texturaEnemigo->loadFromImage("resources/textures.bmp");
-			texturaEnemigo2 = new Texture(gRenderer);
 			texturaEnemigo2->loadFromImage("resources/textures.bmp");
-			texturaEnemigo3 = new Texture(gRenderer);
 			texturaEnemigo3->loadFromImage("resources/textures.bmp");
-			texturaEnemigo4 = new Texture(gRenderer);
 			texturaEnemigo4->loadFromImage("resources/textures.bmp");
-			texturaEnemigo5 = new Texture(gRenderer);
 			texturaEnemigo5->loadFromImage("resources/textures.bmp");
-
-			texturaExplosion = new Texture(gRenderer);
 			texturaExplosion->loadFromImage("resources/textures.bmp");
-			texturaExplosion2 = new Texture(gRenderer);
 			texturaExplosion2->loadFromImage("resources/textures.bmp");
-			texturaExplosion3 = new Texture(gRenderer);
 			texturaExplosion3->loadFromImage("resources/textures.bmp");
-			texturaExplosion4 = new Texture(gRenderer);
 			texturaExplosion4->loadFromImage("resources/textures.bmp");
-			texturaExplosion5 = new Texture(gRenderer);
 			texturaExplosion5->loadFromImage("resources/textures.bmp");
-
-			texturaMuroMetalico = new Texture(gRenderer);
 			texturaMuroMetalico->loadFromImage("resources/textures.bmp");
 
+			
 			Bomber* b1 = new Bomber(texturaBomber1);
 			Bomber* b2 = new Bomber(texturaBomber2);
 
@@ -281,11 +284,11 @@ int GameManager::onExecute() {
 				//b2->setPosicionX(rand() % SCREEN_WIDTH);
 				//b2->setPosicionY(rand() % SCREEN_HEIGHT);
 
-				b1->setPosicionX(0);
-				b1->setPosicionY(28);
+				b1->setPosicionX(25);
+				b1->setPosicionY(25);
 
-				b2->setPosicionX(24+4);
-				b2->setPosicionY(28);
+				b2->setPosicionX(25+24+4);
+				b2->setPosicionY(25);
 				//b2->render();
 				
 
@@ -306,19 +309,19 @@ int GameManager::onExecute() {
 				//e5->render();
 
 				ex->setPosicionX(400);
-				ex->setPosicionY(0);
+				ex->setPosicionY(25);
 				//ex->render();
 				ex2->setPosicionX(400+24+4);
-				ex2->setPosicionY(0);
+				ex2->setPosicionY(25);
 				//ex2->render();
 				ex3->setPosicionX(400+48+8);
-				ex3->setPosicionY(0);
+				ex3->setPosicionY(25);
 				//ex3->render();
 				ex4->setPosicionX(400+72+12);
-				ex4->setPosicionY(0);
+				ex4->setPosicionY(25);
 				//ex4->render();
 				ex5->setPosicionX(400+96+16);
-				ex5->setPosicionY(0);
+				ex5->setPosicionY(25);
 				//ex5->render();
 
 				/*mm->setPosicionX(0);
@@ -374,6 +377,9 @@ int GameManager::onExecute() {
 
 	//Free resources and close SDL
 	close();
+
+	std::cout << "Numero de objetos en el vector: "<<actoresJuego.size() << std::endl;
+	std::cout << "Numero de Objetos Creados: " << GameObject::numeroGameObjectCreados << std::endl;
 
 	return 0;
 
