@@ -1,14 +1,8 @@
 #pragma once
-#include <iostream>
-#include "GameActor.h"
-
-using namespace std;
+#include"GameActor.h"
 
 class Enemigo : public GameActor
 {
-private:
 
-public:
-	Enemigo(Texture* textura);
 };
 

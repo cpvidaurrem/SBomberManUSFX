@@ -3,9 +3,7 @@
 class MuroCeramica :
     public GameActor
 {
-private:
-
 public:
-    MuroCeramica(Texture* textura);
+    MuroCeramica(Texture* _textura, Tile* _tileActual);
 };
 

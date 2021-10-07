@@ -3,9 +3,7 @@
 class SueloCesped :
     public GameActor
 {
-private:
-
 public:
-    SueloCesped(Texture* textura);
+    SueloCesped(Texture* _textura, Tile* _tileActual);
 };
 

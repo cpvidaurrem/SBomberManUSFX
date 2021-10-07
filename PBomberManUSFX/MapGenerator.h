@@ -4,10 +4,12 @@
 #include <fstream>
 #include <string>
 #include "GameObject.h"
-#include "Bomber.h"
+#include "Bomberman.h"
 #include "MuroCeramica.h"
-#include "MuroMetalico.h"
+#include "MuroMetal.h"
 #include "SueloCesped.h"
+#include "Tile.h"
+#include "TilesGraph.h"
 
 class MapGenerator
 {
@@ -15,24 +17,28 @@ private:
 	vector<GameObject*> vectorObjectosJuego;
 	int anchoPantalla;
 	int altoPantalla;
-
+	SDL_Renderer* renderer;
+	TilesGraph* tilesGraph;
 public:
-	//Contructores y destructores
+	// Constructores y destructores
 	MapGenerator();
-	MapGenerator(int _anchoPantalla, int _altoPantalla);
+	MapGenerator(SDL_Renderer* _renderer, int _anchoPantalla, int _altoPantalla);
 
-	//Metodos accesores
+	// Métodos accesores
 	int getAnchoPantalla() { return anchoPantalla; }
 	void setAnchoPantalla(int _anchoPantalla) { anchoPantalla = _anchoPantalla; }
 
 	int getAltoPantalla() { return altoPantalla; }
-	void setAltoPantalla(int _altoPantalla) { altoPantalla = _altoPantalla; }
+	void setAltoPantalla(int _anchoPantalla) { altoPantalla = _anchoPantalla; }
 
-	//Metodos heredados
+	SDL_Renderer* getRendered() { return renderer; }
+	void setRenderer(SDL_Renderer* _renderer) { renderer = _renderer; }
 
-	//Metodos propios
+	// Métodos heredados
+
+	// Métodos propios
 	bool crearObjetosJuego(string _path);
-	void transferirObjetosJuego(vector<GameObject*> &_vectorObjetosJuegoDestino);
+	void transferirObjetosJuego(vector<GameObject*>& _vectorObjetosJuegoDestino);
 
 };
 
