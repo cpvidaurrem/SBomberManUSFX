@@ -7,6 +7,7 @@ GameManager::GameManager() {
 	generadorMapa = nullptr;
 	keyboardInput = KeyboardInput::Instance();
 	enEjecucion = true;
+	tilesGraphGM = nullptr;
 }
 
 bool GameManager::onInit() {
@@ -59,8 +60,11 @@ bool GameManager::onInit() {
 
 bool GameManager::loadContent()
 {
-	generadorMapa = new MapGenerator(gRenderer, SCREEN_WIDTH, SCREEN_HEIGHT);
-	generadorMapa->crearObjetosJuego("resources/levels/level1.txt");
+	tilesGraphGM = new TilesGraph(25, 15, 850, 510);
+	GameActor::tilesGraph = tilesGraphGM;
+
+	generadorMapa = new MapGenerator(gRenderer, SCREEN_WIDTH, SCREEN_HEIGHT, tilesGraphGM);
+	generadorMapa->crearObjetosJuego("resources/level1.txt");
 	generadorMapa->transferirObjetosJuego(actoresJuego);
 
 	if (actoresJuego.size() > 0)
@@ -81,30 +85,21 @@ void GameManager::onEvent(SDL_Event* _event)
 		break;
 	case SDL_KEYUP:
 		keyboardInput->TurnKeyOff(_event->key.keysym.sym);
-
-		switch (_event->key.keysym.sym) {
-		case SDLK_f:
-			//SDL_SetWindowFullscreen(gWindow, SDL_WINDOW_FULLSCREEN);
-			break;
-		case SDLK_n:
-			//SDL_SetWindowFullscreen(gWindow, SDL_WINDOW_MAXIMIZED);
-			break;
-		}
+		break;
+	//	switch (_event->key.keysym.sym) {
+	//	case SDLK_f:
+	//		//SDL_SetWindowFullscreen(gWindow, SDL_WINDOW_FULLSCREEN);
+	//		break;
+	//	case SDLK_n:
+	//		//SDL_SetWindowFullscreen(gWindow, SDL_WINDOW_MAXIMIZED);
+	//		break;
+	//	}
 	}
 }
 
 void GameManager::onLoop() {
 	for (int i = 0; i < actoresJuego.size(); i++) {
-		int up;
-		up = actoresJuego.size()-1;
-		if (i != up) {
-			actoresJuego[i]->update();
-		}
-		else{
-			actoresJuego[i]->update_2();
-		}
-		//actoresJuego[i]->update();
-		
+		actoresJuego[i]->update();
 	}
 }
 
@@ -162,6 +157,7 @@ int GameManager::onExecute() {
 	//Free resources and close SDL
 	close();
 
+	
 	std::cout << "Numero de objetos en el vector: " << actoresJuego.size() << std::endl;
 	std::cout << "Numero de objetos creados:" << GameObject::numeroGameObjectCreados << std::endl;
 

@@ -11,11 +11,12 @@
 #include "MuroMetal.h"
 #include "MapGenerator.h"
 #include "system/KeyboardInput.h"
+#include "TilesGraph.h"
 
 using namespace std;
 
-const int SCREEN_WIDTH = 900;
-const int SCREEN_HEIGHT = 600;
+const int SCREEN_WIDTH = 850;
+const int SCREEN_HEIGHT = 510;
   
 class GameManager
 {
@@ -36,6 +37,8 @@ private:
 
     SDL_Event evento;
     bool enEjecucion;
+
+    TilesGraph* tilesGraphGM;
 public:
     // Constructores & destructores
     GameManager();

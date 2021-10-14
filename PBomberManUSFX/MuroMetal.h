@@ -5,5 +5,6 @@ class MuroMetal :
 {
 public:
     MuroMetal(Texture* _textura, Tile* _tileActual);
+    void setTileActual(Tile* _tileNuevo);
 };
 

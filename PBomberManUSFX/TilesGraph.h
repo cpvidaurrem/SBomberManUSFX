@@ -9,7 +9,7 @@ class TilesGraph
 {
 private:
 
-	vector<Tile*> tilesGraph;
+	vector<Tile*> vTilesGraph;
 	int getIndice(int _x, int _y);
 public:
 	static int anchoPantalla;

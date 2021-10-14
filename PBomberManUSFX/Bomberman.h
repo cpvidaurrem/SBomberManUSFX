@@ -14,7 +14,6 @@ public:
 	void setTileActual(Tile* _tileNuevo) override;
 
 	void update();
-	void update_2();
 	void render();
 
 };

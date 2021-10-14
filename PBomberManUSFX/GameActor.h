@@ -3,6 +3,7 @@
 #include "GameDirecctions.h"
 #include "Texture.h"
 #include "Tile.h"
+#include "TilesGraph.h"
 
 
 class GameActor : public GameObject
@@ -50,7 +51,7 @@ protected:
 
 public:
 	// Propiedades
-	//static TilesGraph* tileGraph;
+	static TilesGraph* tilesGraph;
 
 	//Constructores & destructores
 	GameActor();
@@ -80,12 +81,12 @@ public:
 
 	Texture* getTextura() { return textura; }
 	/*
-	AnimationFrames* getFramesAnimacion() { return framesAnimacion; }
+	AnimationFrames* getFramesAnimacion() { return framesAnimacion; }*/
 	Tile* getTileActual() { return tileActual; }
 	Tile* getTileSiguiente() { return tileSiguiente; }
 	MoveDirection getDireccionActual() { return direccionActual; }
 	MoveDirection getDireccionSiguiente() { return direccionSiguiente; }
-	int getframesDireccion() { return framesDireccion; }
+	/*int getframesDireccion() { return framesDireccion; }
 	SDL_Rect* getColisionador() { return colisionador; }*/
 
 	void setPosicionX(int _posicionX) { posicionX = _posicionX; }
@@ -106,25 +107,25 @@ public:
 	void setEnergia(int _energia) { energia = _energia; }
 	void setVidas(int _vidas) { vidas = _vidas; }
 	void setTextura(Texture* _textura) { textura = _textura; }
-	/*void setFramesAnimacion(AnimationFrames* _framesAnimacion) { framesAnimacion = _framesAnimacion; }
+	/*void setFramesAnimacion(AnimationFrames* _framesAnimacion) { framesAnimacion = _framesAnimacion; }*/
 	virtual void setTileActual(Tile* _tileNuevo) = 0;
 	void setTileSiguiente(Tile* _tileSiguiente) { tileSiguiente = _tileSiguiente; }
 	void setDireccionActual(MoveDirection _direccionActual) { direccionActual = _direccionActual; }
 	void setDireccionSiguiente(MoveDirection _direccionSiguiente) { direccionSiguiente = _direccionSiguiente; }
-	void setFramesDireccion(int _framesDireccion) { framesDireccion = _framesDireccion; }
+	/*void setFramesDireccion(int _framesDireccion) { framesDireccion = _framesDireccion; }
 	void setColisionador(SDL_Rect* _colisionador) { colisionador = _colisionador; }*/
 
 	// Metodos varios
 	/*bool revisarColision(const SDL_Rect* _otroColisionador);
-	bool revisarColision(const SDL_Rect* _colisionador1, const SDL_Rect* _colisionador2);
+	bool revisarColision(const SDL_Rect* _colisionador1, const SDL_Rect* _colisionador2);*/
 	bool tratarDeMover(MoveDirection _direccionNueva);
+	/*
 	int restarEnergia();
 	int restarVida();*/
 
 	//Metodos virtuales, redefinidos o sobrecargados
 	virtual void render();
 	virtual void update() {};
-	virtual void update_2() {};
 	virtual void handleEvent(SDL_Event* event) {};
 	virtual void deleteGameObject() {};
 };

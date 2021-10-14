@@ -177,6 +177,7 @@
     <ClInclude Include="Muro.h" />
     <ClInclude Include="MuroCeramica.h" />
     <ClInclude Include="MuroMetal.h" />
+    <ClInclude Include="Pila.h" />
     <ClInclude Include="SueloCesped.h" />
     <ClInclude Include="system\KeyboardInput.h" />
     <ClInclude Include="Texture.h" />

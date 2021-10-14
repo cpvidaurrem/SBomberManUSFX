@@ -5,5 +5,6 @@ class SueloCesped :
 {
 public:
     SueloCesped(Texture* _textura, Tile* _tileActual);
+    void setTileActual(Tile* _tileNuevo);
 };
 

@@ -26,7 +26,6 @@ public:
 	//Metodos virtuales puros
 	virtual void render() = 0;
 	virtual void update() = 0;
-	virtual void update_2() = 0;
 	virtual void handleEvent(SDL_Event* _event) = 0;
 	//Metodos virtuales
 	virtual void deleteGameObject() { eliminar = true; }

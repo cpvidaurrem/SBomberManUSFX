@@ -22,7 +22,7 @@ TilesGraph::TilesGraph(int _anchoTilesGraph, int _altoTilesGraph, int _anchoPant
 
     for (int y = 0; y < altoTilesGraph; y++) {
         for (int x = 0; x < anchoTilesGraph; x++) {
-            tilesGraph.push_back(new Tile(x, y));
+            vTilesGraph.push_back(new Tile(x, y));
         }
     }
 
@@ -30,6 +30,7 @@ TilesGraph::TilesGraph(int _anchoTilesGraph, int _altoTilesGraph, int _anchoPant
 
 TilesGraph::~TilesGraph()
 {
+    vTilesGraph.clear();
 }
 
 int TilesGraph::getIndice(int _x, int _y)
@@ -39,7 +40,7 @@ int TilesGraph::getIndice(int _x, int _y)
     if (_x < 0 || _y < 0)
         return -1;
 
-    return _x * anchoTilesGraph + _y;
+    return _x + _y * anchoTilesGraph;
 }
 
 Tile* TilesGraph::getTileEn(int _x, int _y)
@@ -49,7 +50,7 @@ Tile* TilesGraph::getTileEn(int _x, int _y)
     if (indice < 0)
         return nullptr;
     
-    return tilesGraph[indice];
+    return vTilesGraph[indice];
 }
 
 array<Tile*, 4> TilesGraph::get4Vecinos(Tile* _tile)
@@ -94,7 +95,7 @@ Bomberman* TilesGraph::getBomberman()
         }
     }*/
 
-    for (auto itg = tilesGraph.begin(); itg != tilesGraph.end(); ++itg) {
+    for (auto itg = vTilesGraph.begin(); itg != vTilesGraph.end(); ++itg) {
         if ((*itg)->getBomberman() != nullptr) {
             return (*itg)->getBomberman();
         }
