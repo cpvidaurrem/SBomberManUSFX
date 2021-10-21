@@ -11,6 +11,8 @@ class Bomberman;
 class MuroCeramica;
 class MuroMetal;
 class SueloCesped;
+class MuroVegetacion; //añadiendo la clase MuroVegetacion
+class Enemigo; //añadiendo la clase Enemigo
 
 class Tile
 {
@@ -19,6 +21,8 @@ private:
 	MuroCeramica* muroCeramica;
 	MuroMetal* muroMetal;
 	SueloCesped* sueloCesped;
+	MuroVegetacion* muroVegetación; // 1. creando un atributo del tipo MuroVegetacion
+	Enemigo* enemigo; //6. Creando un atributo del tipo Enemigo
 
 	int posicionTileX;
 	int posicionTileY;
@@ -36,6 +40,8 @@ public:
 	MuroCeramica* getMuroCeramica() { return muroCeramica; }
 	MuroMetal* getMuroMetal() { return muroMetal; }
 	SueloCesped* getSueloCesped() { return sueloCesped; }
+	MuroVegetacion* getMuroVegetacion() { return muroVegetación; } //1. geter para muroVegetacion
+	Enemigo* getEnemigo() { return enemigo; } //6. geter para enemigo
 	int getPosicionTileX() { return posicionTileX; }
 	int getPosicionTileY() { return posicionTileY; }
 
@@ -43,6 +49,8 @@ public:
 	void setMuroCeramica(MuroCeramica* _muroCeramica) { muroCeramica = _muroCeramica; }
 	void setMuroMetal(MuroMetal* _muroMetal) { muroMetal = _muroMetal; }
 	void setSueloCesped(SueloCesped* _sueloCesped) { sueloCesped = _sueloCesped; }
+	void setMuroVegetacion(MuroVegetacion* _muroVegetacion) { muroVegetación = _muroVegetacion; } //1. seter para muroVegetacion
+	void setEnemigo(Enemigo* _enemigo) { enemigo = _enemigo; }//6. seter para enemigo
 	void setPosicionTileX(int _posicionTileX) { posicionTileX = _posicionTileX; }
 	void setPosicionTileY(int _posicionTileY) { posicionTileY = _posicionTileY; }
 };

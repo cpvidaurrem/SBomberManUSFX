@@ -8,6 +8,8 @@
 #include "MuroCeramica.h"
 #include "MuroMetal.h"
 #include "SueloCesped.h"
+#include "MuroVegetacion.h" //1. incluyendo el muro vegetacion
+#include "Enemigo.h" //6. incluyendo enemigo
 #include "Tile.h"
 #include "TilesGraph.h"
 #include "Pila.h"
