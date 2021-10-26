@@ -2,7 +2,7 @@
 
 Bomberman::Bomberman(Texture* _textura, Tile* _tileActual) :GamePawn(_textura, _tileActual)
 {
-
+	numMovimientos = 0;
 	tileActual = _tileActual;
 	tileSiguiente = nullptr;
 
@@ -65,18 +65,46 @@ void Bomberman::update()
 			enMovimiento = true;
 	}
 	else {
+		int x = 0, y = 0;
+		array<int, 20000> posicionBomberman;
+
 		switch (direccionActual) {
 		case MOVE_DIRECTION_ARRIBA:
 			posicionY = std::max(posicionY - velocidad, tileSiguiente->getPosicionTileY() * Tile::altoTile);
+			numMovimientos++;
+			x = posicionX;
+			y = posicionY;
+			posicionBomberman[numMovimientos] = (x, y);
+			movimientoBomberman[numMovimientos] = (numMovimientos, posicionBomberman);
+			cout << "Numero de movimiento: " << numMovimientos << " Posicion X: " << posicionX << " Posicion Y: " << posicionY << endl;
+
 			break;
 		case MOVE_DIRECTION_ABAJO:
 			posicionY = std::min(posicionY + velocidad, tileSiguiente->getPosicionTileY() * Tile::altoTile);
+			numMovimientos++;
+			x = posicionX;
+			y = posicionY;
+			posicionBomberman[numMovimientos] = (x, y);
+			movimientoBomberman[numMovimientos] = (numMovimientos, posicionBomberman);
+			cout << "Numero de movimiento: " << numMovimientos << " Posicion X: " << posicionX << " Posicion Y: " << posicionY << endl;
 			break;
 		case MOVE_DIRECTION_IZQUIERDA:
 			posicionX = std::max(posicionX - velocidad, tileSiguiente->getPosicionTileX() * Tile::anchoTile);
+			numMovimientos++;
+			x = posicionX;
+			y = posicionY;
+			posicionBomberman[numMovimientos] = (x, y);
+			movimientoBomberman[numMovimientos] = (numMovimientos, posicionBomberman);
+			cout << "Numero de movimiento: " << numMovimientos << " Posicion X: " << posicionX << " Posicion Y: " << posicionY << endl;
 			break;
 		case MOVE_DIRECTION_DERECHA:
 			posicionX = std::min(posicionX + velocidad, tileSiguiente->getPosicionTileX() * Tile::anchoTile);
+			numMovimientos++;
+			x = posicionX;
+			y = posicionY;
+			posicionBomberman[numMovimientos] = (x, y);
+			movimientoBomberman[numMovimientos] = (numMovimientos, posicionBomberman);
+			cout << "Numero de movimiento: " << numMovimientos << " Posicion X: " << posicionX << " Posicion Y: " << posicionY << endl;
 			break;
 		}
 

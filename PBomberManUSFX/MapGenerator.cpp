@@ -127,7 +127,7 @@ bool MapGenerator::crearObjetosJuego(string _path)
 					/*case 'B':
 						objetoNuevo = new Bomberman(texturaBomberman, tileNuevo);
 						break;*/
-				case '3': //1. asignando un caracter para muro ceramica en el nivel
+				case '3': //1. asignando un caracter para muro vegetacion en el nivel
 					objetoNuevo = new MuroVegetacion(texturaMuroVegetacion, tileNuevo);
 					break;
 					//6. Asignando caracteres a los enemigos
@@ -170,7 +170,7 @@ bool MapGenerator::crearObjetosJuego(string _path)
 		vectorObjectosJuego.push_back(objetoBomberman);
 	}
 
-	GameObject* objetoBomberwoman = nullptr;
+	/*GameObject* objetoBomberwoman = nullptr;
 	tileNuevo = tilesGraph->getTileEn(bomberwomanPosicionX, bomberwomanPosicionY);
 	objetoBomberwoman = new Bomberman(texturaBomberwoman, tileNuevo);
 	if (objetoBomberwoman != nullptr) {
@@ -183,14 +183,14 @@ bool MapGenerator::crearObjetosJuego(string _path)
 		((GamePawn*)objetoBomberwoman)->setBotomDerecha(SDLK_d);
 
 		vectorObjectosJuego.push_back(objetoBomberwoman);
-	}
+	}*/
 
-	GameObject* objetoNewBomberman = nullptr;
+	/*GameObject* objetoNewBomberman = nullptr;
 	tileNuevo = tilesGraph->getTileEn(newBombermanPosicionX, newBombermanPosicionY);
 	objetoNewBomberman = new Bomberman(texturanNewBomberman, tileNuevo);
 	if (objetoNewBomberman != nullptr) {
-		((GameActor*)objetoNewBomberman)->setPosicionX(newBombermanPosicionX);
-		((GameActor*)objetoNewBomberman)->setPosicionY(newBombermanPosicionY);
+		((GameActor*)objetoNewBomberman)->setPosicionX(newBombermanPosicionX * 34);
+		((GameActor*)objetoNewBomberman)->setPosicionY(newBombermanPosicionY * 34);
 		((GamePawn*)objetoNewBomberman)->setBotomBomba(SDLK_g);
 		((GamePawn*)objetoNewBomberman)->setBotomArriba(SDLK_i);
 		((GamePawn*)objetoNewBomberman)->setBotomAbajo(SDLK_k);
@@ -198,7 +198,7 @@ bool MapGenerator::crearObjetosJuego(string _path)
 		((GamePawn*)objetoNewBomberman)->setBotomDerecha(SDLK_l);
 
 		vectorObjectosJuego.push_back(objetoNewBomberman);
-	}
+	}*/
 
 
 	return false;

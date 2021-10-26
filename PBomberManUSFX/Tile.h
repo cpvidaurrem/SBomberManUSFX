@@ -11,8 +11,8 @@ class Bomberman;
 class MuroCeramica;
 class MuroMetal;
 class SueloCesped;
-class MuroVegetacion; //añadiendo la clase MuroVegetacion
-class Enemigo; //añadiendo la clase Enemigo
+class MuroVegetacion; //1. añadiendo la clase MuroVegetacion
+class Enemigo; //6. añadiendo la clase Enemigo
 
 class Tile
 {

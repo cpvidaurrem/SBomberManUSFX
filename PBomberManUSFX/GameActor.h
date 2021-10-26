@@ -5,7 +5,6 @@
 #include "Tile.h"
 #include "TilesGraph.h"
 
-
 class GameActor : public GameObject
 {
 
