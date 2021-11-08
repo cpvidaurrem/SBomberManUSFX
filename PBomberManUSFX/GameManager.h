@@ -39,9 +39,22 @@ private:
     bool enEjecucion;
 
     TilesGraph* tilesGraphGM;
-public:
-    // Constructores & destructores
+
+    SDL_Rect camera;
+    Uint32 lastTickTime = 0;
+
+    //Singleton
+    static GameManager* s_instance;
+protected:
+    //Singleton
     GameManager();
+
+public:
+    //Singleton
+    static GameManager* Instance();
+
+    // Constructores & destructores
+    //GameManager();
 
     // Metodos especializados
     bool onInit();

@@ -1,6 +1,5 @@
 #pragma once
 #include <iostream>
-#include <map>
 #include "GamePawn.h"
 
 using namespace std;
@@ -8,16 +7,14 @@ using namespace std;
 class Bomberman : public GamePawn
 {
 private:
-	int numMovimientos;
+
 public:
-	map<int,array<int, 20000>> movimientoBomberman;
-
 	//Constructor
-	Bomberman(Texture* _textura, Tile* _tileActual);
+	Bomberman(std::shared_ptr<SDL_Texture> _texture, SDL_Renderer* _renderer, Tile* _tileActual);
+	
 	void setTileActual(Tile* _tileNuevo) override;
-
-	void update();
-	void render();
+	void render(SDL_Rect& _camera);
+	void update(const unsigned int _delta);
 
 };
 

@@ -7,7 +7,6 @@ class Pila
 {
 private:
 	T* Datos;
-	//vector<T> datos;
 	int Cima;
 	const int numeroElementos;
 public:
@@ -16,14 +15,10 @@ public:
 		Cima = -1;
 	}
 	~Pila() { delete[] Datos; }
-	// funcion Push
 	void Insertar(T c);
-	// funcion Pop
 	T Sacar();
 	bool Vacia();
 	bool Llena();
-
-	int getCima() { return Cima; }
 };
 
 template<class T>
@@ -32,7 +27,7 @@ void Pila<T>::Insertar(T elementoInsertar) {
 		Cima++;
 		Datos[Cima] = elementoInsertar;
 		
-		//cout << "Se insertado satisfactoriamente" << endl;
+		cout << "Se insertado satisfactoriamente" << endl;
 	}
 	else {
 		cout << "No se pudo ingresar el elemento en la pila" << endl;

@@ -1,4 +1,5 @@
 #include "MapGenerator.h"
+#include "Texture.h"
 
 MapGenerator::MapGenerator()
 {
@@ -41,53 +42,49 @@ bool MapGenerator::crearObjetosJuego(string _path)
 	texturaMuroCeramica = new Texture();
 	Texture* texturaSueloCesped;
 	texturaSueloCesped = new Texture();
-	Texture* texturaMuroVegetacion;
-	texturaMuroVegetacion = new Texture(); //1. creando la textura para muro vegetacion
 
-	//6. creando textura para los 5 enemigos
-	Texture* texturaEnemigo1;
-	texturaEnemigo1 = new Texture();
-	Texture* texturaEnemigo2;
-	texturaEnemigo2 = new Texture();
-	Texture* texturaEnemigo3;
-	texturaEnemigo3 = new Texture();
-	Texture* texturaEnemigo4;
-	texturaEnemigo4 = new Texture();
-	Texture* texturaEnemigo5;
-	texturaEnemigo5 = new Texture();
-
-	Texture* texturanNewBomberman;
-	texturanNewBomberman = new Texture(); //8. creando la textura del tercer bomberman
+	//Muros BORDES
+	Texture* texturaMuroMetalEIA;
+	texturaMuroMetalEIA = new Texture();
+	Texture* texturaMuroMetalEIAb;
+	texturaMuroMetalEIAb = new Texture();
+	Texture* texturaMuroMetalEDA;
+	texturaMuroMetalEDA = new Texture();
+	Texture* texturaMuroMetalEDAb;
+	texturaMuroMetalEDAb = new Texture();
+	Texture* texturaMuroMetalI;
+	texturaMuroMetalI = new Texture();
+	Texture* texturaMuroMetalD;
+	texturaMuroMetalD = new Texture();
+	Texture* texturaMuroMetalA;
+	texturaMuroMetalA = new Texture();
+	Texture* texturaMuroMetalAb;
+	texturaMuroMetalAb = new Texture();
 	
 	Texture::renderer = renderer;
 
-	texturaBomberman->loadFromImage("resources/bomberman.png");
-	texturaBomberwoman->loadFromImage("resources/bomberwoman.png");
-	texturaMuroCeramica->loadFromImage("resources/muro_ceramica.png");
-	texturaMuroMetal->loadFromImage("resources/muro_metal.png");
-	texturaSueloCesped->loadFromImage("resources/suelo_cesped.png");
-	texturaMuroVegetacion->loadFromImage("resources/muro_vegetacion.png"); //1. cargando la textura del muro vegetacion
+	texturaBomberman->loadFromImage("resources/bomberwoman.png");
+	texturaBomberwoman->loadFromImage("resources/bomberman.png");
+	texturaMuroCeramica->loadFromImage("resources/muro_ceramica2.png");
+	texturaMuroMetal->loadFromImage("resources/muro_metal3.png");
+	texturaSueloCesped->loadFromImage("resources/suelo_cesped2.png");
 
-	//6. cargando texturas de los enemigos
-	texturaEnemigo1->loadFromImage("resources/enemigo1.png");
-	texturaEnemigo2->loadFromImage("resources/enemigo2.png");
-	texturaEnemigo3->loadFromImage("resources/enemigo3.png");
-	texturaEnemigo4->loadFromImage("resources/enemigo4.png");
-	texturaEnemigo5->loadFromImage("resources/enemigo5.png");
+	//texturas MUROS BORDES
+	texturaMuroMetalEIA->loadFromImage("resources/muro_metal_EIA.png");
+	texturaMuroMetalEIAb->loadFromImage("resources/muro_metal_EIAb.png");
+	texturaMuroMetalEDA->loadFromImage("resources/muro_metal_EDA.png");
+	texturaMuroMetalEDAb->loadFromImage("resources/muro_metal_EDAb.png");
+	texturaMuroMetalI->loadFromImage("resources/muro_metal_I.png");
+	texturaMuroMetalD->loadFromImage("resources/muro_metal_D.png");
+	texturaMuroMetalA->loadFromImage("resources/muro_metal_A.png");
+	texturaMuroMetalAb->loadFromImage("resources/muro_metal_Ab.png");
 	
-	texturanNewBomberman->loadFromImage("resources/bomberman_new2.png");//8. cargando la textura del tercer bomberman
-
 	int x = 0;
 	int y = 0;
 	int bombermanPosicionX = -1;
 	int bombermanPosicionY = -1;
 	int bomberwomanPosicionX = -1;
 	int bomberwomanPosicionY = -1;
-	int newBombermanPosicionX = -1;
-	int newBombermanPosicionY = -1;
-
-	Pila<GameObject*> pilaSueloCesped(200);
-	int cantidadSueloCesped = 0;
 
 	while (getline(file, line)) {
 		vector<char> chars(line.begin(), line.end());
@@ -99,8 +96,8 @@ bool MapGenerator::crearObjetosJuego(string _path)
 				Tile* tileNuevo = tilesGraph->getTileEn(x, y);
 				switch (chars[i]) {
 				case '0':
-					objetoNuevo = new SueloCesped(texturaSueloCesped, tileNuevo);
-					pilaSueloCesped.Insertar(objetoNuevo);
+					//objetoNuevo = new SueloCesped(texturaSueloCesped, tileNuevo);
+					objetoNuevo = new SueloCesped((std::shared_ptr<SDL_Texture>)texturaSueloCesped->getTexturaSDL(), renderer, tileNuevo);
 					if (x > bombermanPosicionX && bombermanPosicionX == -1) {
 						bombermanPosicionX = x;
 						bombermanPosicionY = y;
@@ -111,46 +108,60 @@ bool MapGenerator::crearObjetosJuego(string _path)
 						bomberwomanPosicionY = y;
 					}
 
-					if (x > newBombermanPosicionX || y < newBombermanPosicionY) {
-						newBombermanPosicionX = x;
-						newBombermanPosicionY = y;
-					}
+					//pilaObjetosJuegoMurosMetal.Insertar((GameActor*)objetoNuevo);
 
 					break;
 				case '1':
-					objetoNuevo = new MuroMetal(texturaMuroCeramica, tileNuevo);
-					
+					//objetoNuevo = new MuroMetal(texturaMuroCeramica, tileNuevo);
+					objetoNuevo = new MuroMetal((std::shared_ptr<SDL_Texture>)texturaMuroMetal->getTexturaSDL(), renderer, tileNuevo);
 					break;
 				case '2':
-					objetoNuevo = new MuroCeramica(texturaMuroMetal, tileNuevo);
+					//objetoNuevo = new MuroCeramica(texturaMuroMetal, tileNuevo);
+					objetoNuevo = new MuroCeramica((std::shared_ptr<SDL_Texture>)texturaMuroCeramica->getTexturaSDL(), renderer, tileNuevo);
 					break;
 					/*case 'B':
 						objetoNuevo = new Bomberman(texturaBomberman, tileNuevo);
 						break;*/
-				case '3': //1. asignando un caracter para muro vegetacion en el nivel
-					objetoNuevo = new MuroVegetacion(texturaMuroVegetacion, tileNuevo);
+				case 'M':
+					//objetoNuevo = new MuroMetal(texturaMuroCeramica, tileNuevo);
+					objetoNuevo = new MuroMetal((std::shared_ptr<SDL_Texture>)texturaMuroMetalEIA->getTexturaSDL(), renderer, tileNuevo);
 					break;
-					//6. Asignando caracteres a los enemigos
-				case 'A':
-					objetoNuevo = new Enemigo(texturaEnemigo1, tileNuevo);
+				case 'N':
+					//objetoNuevo = new MuroMetal(texturaMuroCeramica, tileNuevo);
+					objetoNuevo = new MuroMetal((std::shared_ptr<SDL_Texture>)texturaMuroMetalEIAb->getTexturaSDL(), renderer, tileNuevo);
 					break;
-				case 'B':
-					objetoNuevo = new Enemigo(texturaEnemigo2, tileNuevo);
+				case 'O':
+					//objetoNuevo = new MuroMetal(texturaMuroCeramica, tileNuevo);
+					objetoNuevo = new MuroMetal((std::shared_ptr<SDL_Texture>)texturaMuroMetalEDA->getTexturaSDL(), renderer, tileNuevo);
 					break;
-				case 'C':
-					objetoNuevo = new Enemigo(texturaEnemigo3, tileNuevo);
+				case 'P':
+					//objetoNuevo = new MuroMetal(texturaMuroCeramica, tileNuevo);
+					objetoNuevo = new MuroMetal((std::shared_ptr<SDL_Texture>)texturaMuroMetalEDAb->getTexturaSDL(), renderer, tileNuevo);
 					break;
-				case 'D':
-					objetoNuevo = new Enemigo(texturaEnemigo4, tileNuevo);
+				case 'Q':
+					//objetoNuevo = new MuroMetal(texturaMuroCeramica, tileNuevo);
+					objetoNuevo = new MuroMetal((std::shared_ptr<SDL_Texture>)texturaMuroMetalI->getTexturaSDL(), renderer, tileNuevo);
 					break;
-				case 'E':
-					objetoNuevo = new Enemigo(texturaEnemigo5, tileNuevo);
+				case 'R':
+					//objetoNuevo = new MuroMetal(texturaMuroCeramica, tileNuevo);
+					objetoNuevo = new MuroMetal((std::shared_ptr<SDL_Texture>)texturaMuroMetalD->getTexturaSDL(), renderer, tileNuevo);
+					break;
+				case 'S':
+					//objetoNuevo = new MuroMetal(texturaMuroCeramica, tileNuevo);
+					objetoNuevo = new MuroMetal((std::shared_ptr<SDL_Texture>)texturaMuroMetalA->getTexturaSDL(), renderer, tileNuevo);
+					break;
+				case 'T':
+					//objetoNuevo = new MuroMetal(texturaMuroCeramica, tileNuevo);
+					objetoNuevo = new MuroMetal((std::shared_ptr<SDL_Texture>)texturaMuroMetalAb->getTexturaSDL(), renderer, tileNuevo);
 					break;
 				}
 
 				if (objetoNuevo != nullptr) {
-					((GameActor*)objetoNuevo)->setPosicionX(x * 34);
-					((GameActor*)objetoNuevo)->setPosicionY(y * 34);
+
+					((Sprite*)objetoNuevo)->setPosition(x * Tile::anchoTile, y * Tile::altoTile);
+					((Sprite*)objetoNuevo)->setSize(Tile::anchoTile, Tile::altoTile);
+					((Sprite*)objetoNuevo)->setClip(Tile::anchoTile, Tile::altoTile, x * Tile::anchoTile, y * Tile::altoTile);
+			
 					vectorObjectosJuego.push_back(objetoNuevo);
 					x++;
 				}
@@ -158,47 +169,34 @@ bool MapGenerator::crearObjetosJuego(string _path)
 		}
 		y++;
 	}
-	cout << "Numero suelo cesped: " << pilaSueloCesped.getCima()<<endl;
 
-	
 	GameObject* objetoBomberman = nullptr;
 	Tile* tileNuevo = tilesGraph->getTileEn(bombermanPosicionX, bombermanPosicionY);
-	objetoBomberman = new Bomberman(texturaBomberman, tileNuevo);
+	//objetoBomberman = new Bomberman(texturaBomberman, tileNuevo);
+	objetoBomberman = new Bomberman((std::shared_ptr<SDL_Texture>)texturaBomberman->getTexturaSDL(), renderer, tileNuevo);
 	if (objetoBomberman != nullptr) {
-		((GameActor*)objetoBomberman)->setPosicionX(bombermanPosicionX * 34);
-		((GameActor*)objetoBomberman)->setPosicionY(bombermanPosicionY * 34);
+		((Sprite*)objetoBomberman)->setPosition(bombermanPosicionX * Tile::anchoTile, bombermanPosicionY * Tile::altoTile);
+		((Sprite*)objetoBomberman)->setSize(Tile::anchoTile, Tile::altoTile);
+		((Sprite*)objetoBomberman)->setClip(Tile::anchoTile, Tile::altoTile, bombermanPosicionX * Tile::anchoTile, bombermanPosicionY * Tile::altoTile);
+
 		vectorObjectosJuego.push_back(objetoBomberman);
 	}
 
-	/*GameObject* objetoBomberwoman = nullptr;
-	tileNuevo = tilesGraph->getTileEn(bomberwomanPosicionX, bomberwomanPosicionY);
-	objetoBomberwoman = new Bomberman(texturaBomberwoman, tileNuevo);
-	if (objetoBomberwoman != nullptr) {
-		((GameActor*)objetoBomberwoman)->setPosicionX(bomberwomanPosicionX * 34);
-		((GameActor*)objetoBomberwoman)->setPosicionY(bomberwomanPosicionY * 34);
-		((GamePawn*)objetoBomberwoman)->setBotomBomba(SDLK_o);
-		((GamePawn*)objetoBomberwoman)->setBotomArriba(SDLK_w);
-		((GamePawn*)objetoBomberwoman)->setBotomAbajo(SDLK_s);
-		((GamePawn*)objetoBomberwoman)->setBotomIzquierda(SDLK_a);
-		((GamePawn*)objetoBomberwoman)->setBotomDerecha(SDLK_d);
 
-		vectorObjectosJuego.push_back(objetoBomberwoman);
-	}*/
+	//GameObject* objetoBomberwoman = nullptr;
+	//tileNuevo = tilesGraph->getTileEn(bomberwomanPosicionX, bomberwomanPosicionY);
+	//objetoBomberwoman = new Bomberman(texturaBomberwoman, tileNuevo);
+	//if (objetoBomberwoman != nullptr) {
+	//	((GameActor*)objetoBomberwoman)->setPosicionX(bomberwomanPosicionX * 34);
+	//	((GameActor*)objetoBomberwoman)->setPosicionY(bomberwomanPosicionY * 34);
+	//	((GamePawn*)objetoBomberwoman)->setBotomBomba(SDLK_o);
+	//	((GamePawn*)objetoBomberwoman)->setBotomArriba(SDLK_w);
+	//	((GamePawn*)objetoBomberwoman)->setBotomAbajo(SDLK_s);
+	//	((GamePawn*)objetoBomberwoman)->setBotomIzquierda(SDLK_a);
+	//	((GamePawn*)objetoBomberwoman)->setBotomDerecha(SDLK_d);
 
-	/*GameObject* objetoNewBomberman = nullptr;
-	tileNuevo = tilesGraph->getTileEn(newBombermanPosicionX, newBombermanPosicionY);
-	objetoNewBomberman = new Bomberman(texturanNewBomberman, tileNuevo);
-	if (objetoNewBomberman != nullptr) {
-		((GameActor*)objetoNewBomberman)->setPosicionX(newBombermanPosicionX * 34);
-		((GameActor*)objetoNewBomberman)->setPosicionY(newBombermanPosicionY * 34);
-		((GamePawn*)objetoNewBomberman)->setBotomBomba(SDLK_g);
-		((GamePawn*)objetoNewBomberman)->setBotomArriba(SDLK_i);
-		((GamePawn*)objetoNewBomberman)->setBotomAbajo(SDLK_k);
-		((GamePawn*)objetoNewBomberman)->setBotomIzquierda(SDLK_j);
-		((GamePawn*)objetoNewBomberman)->setBotomDerecha(SDLK_l);
-
-		vectorObjectosJuego.push_back(objetoNewBomberman);
-	}*/
+	//	vectorObjectosJuego.push_back(objetoBomberwoman);
+	//}
 
 
 	return false;
@@ -206,6 +204,8 @@ bool MapGenerator::crearObjetosJuego(string _path)
 
 void MapGenerator::transferirObjetosJuego(vector<GameObject*>& _vectorObjetosJuegoDestino)
 {
+	//_vectorObjetosJuegoDestino = vectorObjectosJuego;
+	
 	for (int i = 0; i < vectorObjectosJuego.size(); i++) {
 		_vectorObjetosJuegoDestino.push_back(vectorObjectosJuego[i]);
 	}

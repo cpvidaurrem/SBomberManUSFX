@@ -1,5 +1,7 @@
 #include "GameManager.h"
 
+//Singleton
+GameManager* GameManager::s_instance;
 
 GameManager::GameManager() {
 	gWindow = nullptr;
@@ -8,6 +10,15 @@ GameManager::GameManager() {
 	keyboardInput = KeyboardInput::Instance();
 	enEjecucion = true;
 	tilesGraphGM = nullptr;
+	camera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
+}
+
+//Singleton
+GameManager* GameManager::Instance() {
+	if (s_instance == nullptr) {
+		s_instance = new GameManager();
+	}
+	return s_instance;
 }
 
 bool GameManager::onInit() {
@@ -98,15 +109,20 @@ void GameManager::onEvent(SDL_Event* _event)
 }
 
 void GameManager::onLoop() {
+
+	Uint32 tickTime = SDL_GetTicks();
+	Uint32 delta = tickTime - lastTickTime;
+	lastTickTime = tickTime;
+
 	for (int i = 0; i < actoresJuego.size(); i++) {
-		actoresJuego[i]->update();
+		actoresJuego[i]->update(delta);
 	}
 }
 
 void GameManager::onRender() {
 	SDL_RenderClear(gRenderer);
 	for (int i = 0; i < actoresJuego.size(); i++) {
-		actoresJuego[i]->render();
+		actoresJuego[i]->render(camera);
 	}
 
 	SDL_RenderPresent(gRenderer);
@@ -157,7 +173,6 @@ int GameManager::onExecute() {
 	//Free resources and close SDL
 	close();
 
-	
 	std::cout << "Numero de objetos en el vector: " << actoresJuego.size() << std::endl;
 	std::cout << "Numero de objetos creados:" << GameObject::numeroGameObjectCreados << std::endl;
 

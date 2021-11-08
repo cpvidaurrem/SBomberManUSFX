@@ -9,7 +9,13 @@ using namespace std;
 
 int main(int argc, char* args[])
 {
-	GameManager* gm01 = new GameManager();
-	
+	//Singleton
+	GameManager* gm01;
+	gm01 = GameManager::Instance();
+
 	return gm01->onExecute();
+
+	/*GameManager* gm01 = new GameManager();
+	
+	return gm01->onExecute();*/
 }
