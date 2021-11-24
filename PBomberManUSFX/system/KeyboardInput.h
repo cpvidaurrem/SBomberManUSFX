@@ -7,6 +7,7 @@
  *
  */
 
+#include <iostream>
 #include <SDL_keycode.h>
 #include <map>
 
@@ -25,8 +26,7 @@
  */
 class KeyboardInput
 {
-    public:
-
+public:
         /**
          *  \brief Method to be used instead of constructor
          *
@@ -66,7 +66,7 @@ class KeyboardInput
          */
         bool IsKeyOn(SDL_Keycode key);
 
-    protected:
+protected:
 
         /**
          *  \brief Constructor for KeyboardInput
@@ -76,7 +76,7 @@ class KeyboardInput
          */
         KeyboardInput();
 
-    private:
+private:
         std::map<SDL_Keycode,bool>  m_keys_pressed;
 
         static KeyboardInput*       s_instance;
