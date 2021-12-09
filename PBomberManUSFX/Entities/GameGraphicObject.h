@@ -1,5 +1,4 @@
-#ifndef _BOMBERMAN_ENTITIES_GameGraphicObject_H_
-#define _BOMBERMAN_ENTITIES_GameGraphicObject_H_
+#pragma once
 
 #include <SDL.h>
 #include <memory>
@@ -99,7 +98,7 @@ class GameGraphicObject: public GameObject
         *
         * @param SDL_Rect - camera position
         */
-    void render(const SDL_Rect& camera) const;
+    void render(const SDL_Rect& camera);
     virtual void handleEvent(SDL_Event* _event) {};
     protected:
     SDL_Renderer* renderer = nullptr;               // SDL2 renderer
@@ -111,5 +110,3 @@ class GameGraphicObject: public GameObject
     private:
     bool isAttachedToCamera = true; // follow to camera
 };
-
-#endif // _BOMBERMAN_ENTITIES_GameGraphicObject_H_

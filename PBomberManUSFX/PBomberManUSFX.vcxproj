@@ -142,11 +142,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Adapters\GameObjectPacman.cpp" />
+    <ClCompile Include="Adapters\Texture.cpp" />
+    <ClCompile Include="Adapters\TextureManager.cpp" />
+    <ClCompile Include="Adapters\Tile.cpp" />
+    <ClCompile Include="Adapters\TileGraph.cpp" />
+    <ClCompile Include="Adapters\WallPacman.cpp" />
+    <ClCompile Include="Adapters\WallPacmanAdapter.cpp" />
+    <ClCompile Include="Builder\Builder.cpp" />
+    <ClCompile Include="Builder\BuilderCartoon.cpp" />
+    <ClCompile Include="Builder\BuilderClasico.cpp" />
+    <ClCompile Include="Builder\Director.cpp" />
     <ClCompile Include="Core\Animation.cpp" />
+    <ClCompile Include="Decorator\BorderDecoratorWall.cpp" />
+    <ClCompile Include="Decorator\DecoratorWall.cpp" />
+    <ClCompile Include="Decorator\ShineDecoratorWall.cpp" />
     <ClCompile Include="Entities\CartoonEnemy.cpp" />
     <ClCompile Include="Entities\CartoonPlayer.cpp" />
     <ClCompile Include="Entities\ClasicoEnemy.cpp" />
     <ClCompile Include="Entities\ClasicoPlayer.cpp" />
+    <ClCompile Include="Entities\EnemigoFantasma.cpp" />
     <ClCompile Include="Entities\Enemy.cpp" />
     <ClCompile Include="Entities\GameActor.cpp" />
     <ClCompile Include="Entities\GameGraphicObject.cpp" />
@@ -157,9 +172,15 @@
     <ClCompile Include="Entities\Player.cpp" />
     <ClCompile Include="Entities\RealistaEnemy.cpp" />
     <ClCompile Include="Entities\RealistaPlayer.cpp" />
+    <ClCompile Include="Entities\Soil.cpp" />
+    <ClCompile Include="Entities\SoilGrass.cpp" />
     <ClCompile Include="Entities\Sound.cpp" />
     <ClCompile Include="Entities\Sprite.cpp" />
     <ClCompile Include="Entities\Text.cpp" />
+    <ClCompile Include="Entities\Wall.cpp" />
+    <ClCompile Include="Entities\WallBrick.cpp" />
+    <ClCompile Include="Entities\WallMetal.cpp" />
+    <ClCompile Include="Entities\WallStone.cpp" />
     <ClCompile Include="Factories\Factory.cpp" />
     <ClCompile Include="Factories\FactoryGameCartoon.cpp" />
     <ClCompile Include="Factories\FactoryGameClasico.cpp" />
@@ -169,6 +190,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Managers\AssetManager.cpp" />
     <ClCompile Include="Managers\SceneManager.cpp" />
+    <ClCompile Include="Scenes\GameLevelScene.cpp" />
     <ClCompile Include="Scenes\GameOverScene.cpp" />
     <ClCompile Include="Scenes\LevelScene.cpp" />
     <ClCompile Include="Scenes\MenuScene.cpp" />
@@ -178,12 +200,27 @@
     <ClCompile Include="Util\Pathfinding.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Adapters\GameObjectPacman.h" />
+    <ClInclude Include="Adapters\Texture.h" />
+    <ClInclude Include="Adapters\TextureManager.h" />
+    <ClInclude Include="Adapters\Tile.h" />
+    <ClInclude Include="Adapters\TileGraph.h" />
+    <ClInclude Include="Adapters\WallPacman.h" />
+    <ClInclude Include="Adapters\WallPacmanAdapter.h" />
+    <ClInclude Include="Builder\Builder.h" />
+    <ClInclude Include="Builder\BuilderCartoon.h" />
+    <ClInclude Include="Builder\BuilderClasico.h" />
+    <ClInclude Include="Builder\Director.h" />
     <ClInclude Include="Const.h" />
     <ClInclude Include="Core\Animation.h" />
+    <ClInclude Include="Decorator\BorderDecoratorWall.h" />
+    <ClInclude Include="Decorator\DecoratorWall.h" />
+    <ClInclude Include="Decorator\ShineDecoratorWall.h" />
     <ClInclude Include="Entities\CartoonEnemy.h" />
     <ClInclude Include="Entities\CartoonPlayer.h" />
     <ClInclude Include="Entities\ClasicoEnemy.h" />
     <ClInclude Include="Entities\ClasicoPlayer.h" />
+    <ClInclude Include="Entities\EnemigoFantasma.h" />
     <ClInclude Include="Entities\Enemy.h" />
     <ClInclude Include="Entities\GameActor.h" />
     <ClInclude Include="Entities\GameGraphicObject.h" />
@@ -194,9 +231,15 @@
     <ClInclude Include="Entities\Player.h" />
     <ClInclude Include="Entities\RealistaEnemy.h" />
     <ClInclude Include="Entities\RealistaPlayer.h" />
+    <ClInclude Include="Entities\Soil.h" />
+    <ClInclude Include="Entities\SoilGrass.h" />
     <ClInclude Include="Entities\Sound.h" />
     <ClInclude Include="Entities\Sprite.h" />
     <ClInclude Include="Entities\Text.h" />
+    <ClInclude Include="Entities\Wall.h" />
+    <ClInclude Include="Entities\WallBrick.h" />
+    <ClInclude Include="Entities\WallMetal.h" />
+    <ClInclude Include="Entities\WallStone.h" />
     <ClInclude Include="Factories\Factory.h" />
     <ClInclude Include="Factories\FactoryGameCartoon.h" />
     <ClInclude Include="Factories\FactoryGameClasico.h" />
@@ -205,8 +248,10 @@
     <ClInclude Include="GameAITypes.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameTextures.h" />
+    <ClInclude Include="GameVersions.h" />
     <ClInclude Include="Managers\AssetManager.h" />
     <ClInclude Include="Managers\SceneManager.h" />
+    <ClInclude Include="Scenes\GameLevelScene.h" />
     <ClInclude Include="Scenes\GameOverScene.h" />
     <ClInclude Include="Scenes\LevelScene.h" />
     <ClInclude Include="Scenes\MenuScene.h" />

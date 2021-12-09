@@ -19,9 +19,19 @@
 #include "../Factories/Factory.h"
 #include "../Factories/FactoryGameClasico.h"
 #include "../Factories/FactoryGameCartoon.h"
-#include "../Factories/FactoryGameRealista.h"
-#include "../Factories/FactoryGamePersonalizado.h"
 #include "../Entities/ClasicoPlayer.h"
+#include "../GameVersions.h"
+#include "../GameTextures.h"
+
+#include "../Adapters/WallPacman.h"
+#include "../Adapters/TileGraph.h"
+#include "../Adapters/Tile.h"
+
+#include "../Decorator/DecoratorWall.h"
+#include "../Decorator/BorderDecoratorWall.h"
+#include "../Decorator/ShineDecoratorWall.h"
+
+#include"../Entities/EnemigoFantasma.h"
 
 /**
     * @brief Level Scene
@@ -38,7 +48,9 @@ public:
         * @param game - game pointer
         * @param stage - stage number
         */
-    LevelScene(GameManager* game, const unsigned int stage, const unsigned int prevScore);
+    LevelScene(GameManager* game, const unsigned int _stage, const unsigned int _prevScore);
+    LevelScene(GameManager* game, GameVersion _gameVersion, const unsigned int _stage, const unsigned int _prevScore);
+    
     /**
         * @brief Catch SDL2 events
         *
@@ -54,7 +66,6 @@ public:
 
 private:
     
-
     // spawn and generation of map objects
     void spawnTextObjects();
     void generateTileMap();
@@ -64,8 +75,15 @@ private:
     void spawnGrass(const int positionX, const int positionY);
     void spawnBrick(const int positionX, const int positionY);
     void spawnStone(const int positionX, const int positionY);
+    void spawnWallPacman(const int positionX, const int positionY, Tile* _tile);
+
     void spawnPlayer(const int positionX, const int positionY);
-    void spawnEnemy(Texture texture, AIType type, const int positionX, const int positionY);
+    void spawnEnemy(GameTexture texture, AIType type, const int positionX, const int positionY);
+
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    void spawnEnemyGhost(GameTexture texture, AIType type, const int positionX, const int positionY);
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
     void spawnBomb(GameGraphicObject* object);
     void spawnBang(GameGraphicObject* object);
     void spawnDoor(GameGraphicObject* object);
@@ -101,6 +119,11 @@ private:
     // update collisions
     void updatePlayerCollision();
     void updateEnemiesCollision();
+
+    /*++++++++++++++++Colision de enemigos fantasma +++++++++++++++++++++++++++++++++*/
+    void updateEnemiesGhostCollision();
+    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
     void updateBangsCollision();
     bool isCollisionDetected(const SDL_Rect& rect1, const SDL_Rect& rect2) const;
     // destroy brick
@@ -131,9 +154,16 @@ private:
     std::shared_ptr<Sprite> bomb = nullptr;                           // player's bomb
     std::shared_ptr<Sprite> door = nullptr;                           // door for level finish
     std::vector<std::shared_ptr<Enemy>> enemies;                      // enemies
-    std::vector<std::pair<Tile, std::shared_ptr<GameGraphicObject>>> collisions; // collisions
+
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    std::shared_ptr<EnemigoFantasma> enemyGhost;             //enemigo Fantasma
+    std::vector<std::shared_ptr<Enemy>> enemiesGhost;       // vector de enemigos fantasma
+    std::vector<std::pair<GameTile, std::shared_ptr<GameGraphicObject>>> collisionsEnemyGhost;  // vector de colisiones del enemigo fantasma
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+    std::vector<std::pair<GameTile, std::shared_ptr<GameGraphicObject>>> collisions; // collisions
     std::vector<std::shared_ptr<GameGraphicObject>> bangs;                       // bomb's bang
-    Tile tiles[tileArrayHeight][tileArrayWidth];                      // tilemap
+    GameTile tiles[tileArrayHeight][tileArrayWidth];                      // tilemap
 
 
     int playerDirectionX = 0; // direction used for control
@@ -149,6 +179,8 @@ private:
     bool isPaused = false;
     bool isWin = false;
     // variables
+    //unsigned int gameVersion = GAMEVERSION_CLASIC;
+    unsigned int gameVersion = GAMEVERSION_CARTOON;
     unsigned int score = 0;
     unsigned int stage = 0;
 
@@ -159,6 +191,8 @@ private:
     int scaledTileSize = 0;
     // last object that used as background (grass)
     int backgroundObjectLastNumber = 0;
+
+    TileGraph* tileGraph;
 };
 
 #endif // _BOMBERMAN_LEVEL_SCENE_H_

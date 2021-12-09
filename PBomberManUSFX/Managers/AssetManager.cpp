@@ -5,24 +5,28 @@
 
 void AssetManager::load(SDL_Renderer* renderer)
 {
-    // load font
+        // load font
     loadFont();
     // load textures
-    loadTexture(renderer, Texture::MenuBack, "assets/menu_title.png");
-    loadTexture(renderer, Texture::Metal, "resources/muro_metal.jpg");
-    loadTexture(renderer, Texture::Stone, "resources/muro_piedra_01.png");
-    loadTexture(renderer, Texture::Grass, "resources/suelo_cesped_01.png");
-    loadTexture(renderer, Texture::Brick, "resources/muro_ceramica_01.png");
-    loadTexture(renderer, Texture::Player, "assets/player.png");
-    loadTexture(renderer, Texture::Enemy1, "assets/enemy_1.png");
-    loadTexture(renderer, Texture::Enemy2, "assets/enemy_2.png");
-    loadTexture(renderer, Texture::Enemy3, "assets/enemy_3.png");
-    loadTexture(renderer, Texture::Bomb, "assets/bomb.png");
-    loadTexture(renderer, Texture::Explosion, "assets/explosion.png");
-    loadTexture(renderer, Texture::Door, "assets/door.png");
+    loadTexture(renderer, GameTexture::MenuBack, "assets/menu_title_02.png");
+    loadTexture(renderer, GameTexture::Metal, "resources/muro_metal_02.png");
+    loadTexture(renderer, GameTexture::Stone, "resources/muro_piedra_04.png");
+    loadTexture(renderer, GameTexture::Grass, "resources/suelo_cesped_02.png");
+    loadTexture(renderer, GameTexture::Brick, "resources/muro_ladrillo_02.png");
+    loadTexture(renderer, GameTexture::WallPacman, "resources/wall_sprite.bmp");
+    loadTexture(renderer, GameTexture::Player, "assets/player.png");
+    loadTexture(renderer, GameTexture::Enemy1, "assets/enemy_1.png");
+    loadTexture(renderer, GameTexture::Enemy2, "assets/enemy_2.png");
+    loadTexture(renderer, GameTexture::Enemy3, "assets/enemy_3.png");
+
+    loadTexture(renderer, GameTexture::EnemyGhost, "assets/enemy_ghost.png");
+
+    loadTexture(renderer, GameTexture::Bomb, "assets/bomb.png");
+    loadTexture(renderer, GameTexture::Explosion, "assets/explosion.png");
+    loadTexture(renderer, GameTexture::Door, "assets/door.png");
     // load music
-    loadMusic(MusicEnum::MainMenu, "assets/main_theme.ogg");
-    loadMusic(MusicEnum::Level, "assets/level.ogg");
+    loadMusic(MusicEnum::MainMenu, "assets/main_theme_02.mp3");
+    loadMusic(MusicEnum::Level, "assets/level_02.mp3");
     // load sounds
     loadSound(SoundEnum::Win, "assets/win.wav");
     loadSound(SoundEnum::Lose, "assets/lose.wav");
@@ -38,7 +42,7 @@ std::shared_ptr<TTF_Font> AssetManager::getFont() const
     return font;
 }
 
-std::shared_ptr<SDL_Texture> AssetManager::getTexture(Texture texture)
+std::shared_ptr<SDL_Texture> AssetManager::getTexture(GameTexture texture)
 {
     return textures[texture];
 }
@@ -63,7 +67,7 @@ void AssetManager::loadFont()
     }
 }
 
-void AssetManager::loadTexture(SDL_Renderer* renderer, Texture texture, const std::string& filePath)
+void AssetManager::loadTexture(SDL_Renderer* renderer, GameTexture texture, const std::string& filePath)
 {
     textures[texture] =
         std::shared_ptr<SDL_Texture>(IMG_LoadTexture(renderer, filePath.c_str()), SDL_DestroyTexture);
