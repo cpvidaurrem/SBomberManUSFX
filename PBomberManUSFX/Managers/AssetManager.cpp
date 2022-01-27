@@ -9,7 +9,7 @@ void AssetManager::load(SDL_Renderer* renderer)
     loadFont();
     // load textures
     loadTexture(renderer, GameTexture::MenuBack, "assets/menu_title_02.png");
-    loadTexture(renderer, GameTexture::Metal, "resources/muro_metal_02.png");
+    loadTexture(renderer, GameTexture::Metal, "resources/muro_metal.png");
     loadTexture(renderer, GameTexture::Stone, "resources/muro_piedra_04.png");
     loadTexture(renderer, GameTexture::Grass, "resources/suelo_cesped_02.png");
     loadTexture(renderer, GameTexture::Brick, "resources/muro_ladrillo_02.png");
@@ -18,6 +18,11 @@ void AssetManager::load(SDL_Renderer* renderer)
     loadTexture(renderer, GameTexture::Enemy1, "assets/enemy_1.png");
     loadTexture(renderer, GameTexture::Enemy2, "assets/enemy_2.png");
     loadTexture(renderer, GameTexture::Enemy3, "assets/enemy_3.png");
+
+    /*ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff*/
+    loadTexture(renderer,GameTexture::MuroMagicoCartoon, "resources/muro_magico.png");
+    loadTexture(renderer, GameTexture::MuroMagicoClasico, "resources/muro_magico_02.png");
+    /*ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff*/
 
     loadTexture(renderer, GameTexture::EnemyGhost, "assets/enemy_ghost.png");
 

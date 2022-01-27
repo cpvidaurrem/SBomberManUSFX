@@ -3,6 +3,7 @@
 
 #include <SDL.h>
 #include <vector>
+#include <list>
 
 #include "../Entities/GameGraphicObject.h"
 
@@ -37,6 +38,7 @@ class Scene
         * @param object
         * @param position - position where to insert object
         */
+
     void insertObject(std::shared_ptr<GameObject> object, int position);
     /**
         * @brief Remove object from scene
@@ -83,6 +85,7 @@ class Scene
     GameManager* gameManager = nullptr; // pointer to game for use in all scenes
 
     private:
+
     std::vector<std::shared_ptr<GameObject>> objects; // objects to update and render
     std::vector<GameObject*> vectorObjectosJuego;
     

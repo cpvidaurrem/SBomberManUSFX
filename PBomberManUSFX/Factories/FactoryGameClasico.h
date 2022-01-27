@@ -22,6 +22,8 @@
 #include "../GameTextures.h"
 #include "../Factories/Factory.h"
 
+#include "../Entities/MuroMagicoClasico.h"
+
 
 class FactoryGameClasico :
     public Factory
@@ -35,6 +37,9 @@ public:
 
     std::shared_ptr<GameObject> CreatePlayer(const int _positionX, const int _positionY);
     std::shared_ptr<GameObject> CreateEnemy(AIType _type, const int _positionX, const int _positionY);
-    
+
+    /*ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff*/
+    std::shared_ptr<GameObject> CreateMuroMagico(const int _positionX, const int _positionY);
+    /*ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff*/
 };
 

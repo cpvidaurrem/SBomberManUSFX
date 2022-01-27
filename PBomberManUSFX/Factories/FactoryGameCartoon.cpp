@@ -27,3 +27,14 @@ std::shared_ptr<GameObject> FactoryGameCartoon::CreateEnemy(AIType _type, const 
     return dynamic_pointer_cast<GameObject>(enemy);
 }
 
+/*ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff*/
+std::shared_ptr<GameObject> FactoryGameCartoon::CreateMuroMagico(const int _positionX, const int _positionY)
+{
+    auto muroMagico = std::make_shared<MuroMagicoCartoon>(gameManager->getAssetManager()->getTexture(GameTexture::MuroMagicoCartoon), gameManager->getRenderer());
+    muroMagico->setPosition(_positionX, _positionY);
+    muroMagico->setSize(scaledTileSize, scaledTileSize);
+
+    return dynamic_pointer_cast<GameObject>(muroMagico);
+}
+/*ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff*/
+

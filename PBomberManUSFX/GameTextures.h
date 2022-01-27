@@ -15,5 +15,7 @@ enum class GameTexture : int
     EnemyGhost,
     Bomb,
     Explosion,
-    Door
+    Door,
+    MuroMagicoCartoon,
+    MuroMagicoClasico
 };

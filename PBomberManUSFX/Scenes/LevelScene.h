@@ -77,12 +77,14 @@ private:
     void spawnStone(const int positionX, const int positionY);
     void spawnWallPacman(const int positionX, const int positionY, Tile* _tile);
 
+    /*fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff*/
+    void spawnMuroMagico(const int positionX, const int positionY);
+    void spawnMuroMagico();
+    /*fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff*/
+
     void spawnPlayer(const int positionX, const int positionY);
     void spawnEnemy(GameTexture texture, AIType type, const int positionX, const int positionY);
-
-    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     void spawnEnemyGhost(GameTexture texture, AIType type, const int positionX, const int positionY);
-    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
     void spawnBomb(GameGraphicObject* object);
     void spawnBang(GameGraphicObject* object);
@@ -119,11 +121,7 @@ private:
     // update collisions
     void updatePlayerCollision();
     void updateEnemiesCollision();
-
-    /*++++++++++++++++Colision de enemigos fantasma +++++++++++++++++++++++++++++++++*/
     void updateEnemiesGhostCollision();
-    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
     void updateBangsCollision();
     bool isCollisionDetected(const SDL_Rect& rect1, const SDL_Rect& rect2) const;
     // destroy brick
@@ -154,12 +152,13 @@ private:
     std::shared_ptr<Sprite> bomb = nullptr;                           // player's bomb
     std::shared_ptr<Sprite> door = nullptr;                           // door for level finish
     std::vector<std::shared_ptr<Enemy>> enemies;                      // enemies
-
-    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     std::shared_ptr<EnemigoFantasma> enemyGhost;             //enemigo Fantasma
     std::vector<std::shared_ptr<Enemy>> enemiesGhost;       // vector de enemigos fantasma
     std::vector<std::pair<GameTile, std::shared_ptr<GameGraphicObject>>> collisionsEnemyGhost;  // vector de colisiones del enemigo fantasma
-    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+    /*ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff*/
+    std::vector<std::pair<GameTile, std::shared_ptr<GameGraphicObject>>> collisionsEnemy; // vector de colisiones de enemigos normales
+    /*ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff*/
 
     std::vector<std::pair<GameTile, std::shared_ptr<GameGraphicObject>>> collisions; // collisions
     std::vector<std::shared_ptr<GameGraphicObject>> bangs;                       // bomb's bang

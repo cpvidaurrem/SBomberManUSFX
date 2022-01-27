@@ -3,6 +3,10 @@
 #include <functional>
 #include <random>
 #include <string>
+#include <cstdlib>//ffffffffffffffffffffffffffffffffffff
+#include <stdio.h>//ffffffffffffffffffffffffffffffffffff
+#include <stdlib.h>//ffffffffffffffffffffffffffffffffffff
+#include <ctime>//ffffffffffffffffffffffffffffffffffff
 
 #include "../Entities/Sprite.h"
 #include "../Entities/WallBrick.h"
@@ -19,42 +23,42 @@
 #include "../Scenes/StageScene.h"
 #include "../Util/Pathfinding.h"
 
-LevelScene::LevelScene(GameManager* _gameManager, const unsigned int _stage, const unsigned int prevScore)
-    : Scene(_gameManager), score(prevScore), stage(_stage)
-{
-    
-    // common field parameters
-    fieldPositionX = 0;
-    fieldPositionY = gameManager->getWindowHeight() / 15;
-    //fieldPositionY = 0;
-    const float scale = (gameManager->getWindowHeight() - fieldPositionY) / static_cast<float>(tileArrayHeight * tileSize);
-    scaledTileSize = static_cast<int>(round(scale * tileSize));
-    
-    Tile::tileHeight = scaledTileSize;
-    Tile::tileWidth = scaledTileSize;
-
-    // menu music
-    menuMusic = std::make_shared<Music>(gameManager->getAssetManager()->getMusic(MusicEnum::Level));
-    menuMusic->play();
-    // sounds
-    gameoverSound = std::make_shared<Sound>(gameManager->getAssetManager()->getSound(SoundEnum::Lose));
-    winSound = std::make_shared<Sound>(gameManager->getAssetManager()->getSound(SoundEnum::Win));
-    explosionSound = std::make_shared<Sound>(gameManager->getAssetManager()->getSound(SoundEnum::Explosion));
-    // render text
-    spawnTextObjects();
-    // generate tile map
-    //generateTileMap();
-    // 
-    
-    //tileGraph = new TileGraph(25, 15);
-    crearObjetosJuego("resources/level1.txt");
-    // prepare player
-    spawnPlayer(fieldPositionX + playerStartX * scaledTileSize, fieldPositionY + playerStartY * scaledTileSize);
-    // generate enemies
-    generateEnemies();
-    // set timer
-    updateLevelTimer();
-}
+//LevelScene::LevelScene(GameManager* _gameManager, const unsigned int _stage, const unsigned int prevScore)
+//    : Scene(_gameManager), score(prevScore), stage(_stage)
+//{
+//    
+//    // common field parameters
+//    fieldPositionX = 0;
+//    fieldPositionY = gameManager->getWindowHeight() / 15;
+//    //fieldPositionY = 0;
+//    const float scale = (gameManager->getWindowHeight() - fieldPositionY) / static_cast<float>(tileArrayHeight * tileSize);
+//    scaledTileSize = static_cast<int>(round(scale * tileSize));
+//    
+//    Tile::tileHeight = scaledTileSize;
+//    Tile::tileWidth = scaledTileSize;
+//
+//    // menu music
+//    menuMusic = std::make_shared<Music>(gameManager->getAssetManager()->getMusic(MusicEnum::Level));
+//    menuMusic->play();
+//    // sounds
+//    gameoverSound = std::make_shared<Sound>(gameManager->getAssetManager()->getSound(SoundEnum::Lose));
+//    winSound = std::make_shared<Sound>(gameManager->getAssetManager()->getSound(SoundEnum::Win));
+//    explosionSound = std::make_shared<Sound>(gameManager->getAssetManager()->getSound(SoundEnum::Explosion));
+//    // render text
+//    spawnTextObjects();
+//    // generate tile map
+//    //generateTileMap();
+//    // 
+//    
+//    //tileGraph = new TileGraph(25, 15);
+//    crearObjetosJuego("resources/level1.txt");
+//    // prepare player
+//    spawnPlayer(fieldPositionX + playerStartX * scaledTileSize, fieldPositionY + playerStartY * scaledTileSize);
+//    // generate enemies
+//    generateEnemies();
+//    // set timer
+//    updateLevelTimer();
+//}
 
 LevelScene::LevelScene(GameManager* _gameManager, GameVersion _gameVersion, const unsigned int _stage, const unsigned int prevScore)
     : Scene(_gameManager), gameVersion(_gameVersion), score(prevScore), stage(_stage)
@@ -96,11 +100,21 @@ LevelScene::LevelScene(GameManager* _gameManager, GameVersion _gameVersion, cons
     // 
     //tileGraph = new TileGraph(25, 15);
     crearObjetosJuego("resources/level1.txt");
+
+    // generate enemies
+    generateEnemies();
+
     // prepare player
     spawnPlayer(fieldPositionX + playerStartX * scaledTileSize,
         fieldPositionY + playerStartY * scaledTileSize);
-    // generate enemies
-    generateEnemies();
+    /*fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff*/
+    srand(time(NULL));
+    int x, y;
+    x = rand() % (23 - 1 + 1) + 1;
+    y = rand() % (13 - 1 + 1) + 1;
+    spawnMuroMagico(fieldPositionX + x * scaledTileSize, fieldPositionY + y * scaledTileSize);
+    /*fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff*/
+
     // set timer
     updateLevelTimer();
 }
@@ -201,98 +215,69 @@ void LevelScene::spawnGrass(const int positionX, const int positionY)
     grass->setPosition(positionX, positionY);
     grass->setSize(scaledTileSize, scaledTileSize);
     addObject(grass);
-
-    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     collisionsEnemyGhost.push_back(std::make_pair(GameTile::Grass, grass));
-    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-    backgroundObjectLastNumber++;
-}
-
-void LevelScene::spawnMetal(const int positionX, const int positionY)
-{
-    auto metal = std::make_shared<WallMetal>(gameManager->getAssetManager()->getTexture(GameTexture::Metal),
-        gameManager->getRenderer());
-    metal->setPosition(positionX, positionY);
-    metal->setSize(scaledTileSize, scaledTileSize);
-    addObject(metal);
     backgroundObjectLastNumber++;
 }
 
 void LevelScene::spawnBrick(const int positionX, const int positionY)
 {
-    //auto brick = std::make_shared<Sprite>(gameManager->getAssetManager()->getTexture(GameTexture::Brick), gameManager->getRenderer());
     auto brick = std::make_shared<WallBrick>(gameManager->getAssetManager()->getTexture(GameTexture::Brick), gameManager->getRenderer());
     brick->setPosition(positionX, positionY);
     brick->setSize(scaledTileSize, scaledTileSize);
     addObject(brick);
+    
+    collisionsEnemy.push_back(std::make_pair(GameTile::Brick, brick));
+
     collisions.push_back(std::make_pair(GameTile::Brick, brick));
 }
 
 void LevelScene::spawnStone(const int positionX, const int positionY)
 {
-    //std::shared_ptr<BorderDecoratorWall> stone;
-    //auto stone = std::make_shared<BorderDecoratorWall>(
-   /* shared_ptr<BorderDecoratorWall> stone (new BorderDecoratorWall(
-        gameManager->getAssetManager()->getTexture(GameTexture::Stone), gameManager->getRenderer(), (Wall*)(
-            std::shared_ptr<WallStone>(new WallStone(
-                gameManager->getAssetManager()->getTexture(GameTexture::Stone), gameManager->getRenderer()
-                )).get()
-            )
-    ));*/
-    //GameActor* stone = new ShineDecoratorWall(gameManager->getAssetManager()->getTexture(GameTexture::Stone), gameManager->getRenderer(), new BorderDecoratorWall(gameManager->getAssetManager()->getTexture(GameTexture::Stone), gameManager->getRenderer(), new WallStone(gameManager->getAssetManager()->getTexture(GameTexture::Stone), gameManager->getRenderer())));
     auto stone = std::make_shared<WallStone>(gameManager->getAssetManager()->getTexture(GameTexture::Stone), gameManager->getRenderer());
     stone->setPosition(positionX, positionY);
     stone->setSize(scaledTileSize, scaledTileSize);
     std::shared_ptr<GameActor> temp(stone);
     addObject(temp);
+
+    collisionsEnemy.push_back(std::make_pair(GameTile::Stone, temp)); //ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+
     collisions.push_back(std::make_pair(GameTile::Stone, temp));
     backgroundObjectLastNumber++;
 }
 
-void LevelScene::spawnWallPacman(const int positionX, const int positionY, Tile* _tile)
+/*fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff*/
+void LevelScene::spawnMuroMagico(const int positionX, const int positionY)
 {
-    auto wallPacman = std::make_shared<WallPacmanAdapter>(gameManager->getAssetManager()->getTexture(GameTexture::WallPacman), gameManager->getRenderer(), _tile);
-    wallPacman->setPosition(positionX, positionY);
-    wallPacman->setSDLPosition(positionX, positionY);
-    wallPacman->setSize(scaledTileSize, scaledTileSize);
-    addObject(wallPacman);
-    collisions.push_back(std::make_pair(GameTile::Stone, wallPacman));
+    std::shared_ptr<Wall> muroMagico;
+    muroMagico = dynamic_pointer_cast<Wall>(factory->CreateMuroMagico(positionX, positionY));
+    addObject(muroMagico);
+
+    collisionsEnemyGhost.push_back(std::make_pair(GameTile::Stone, muroMagico));
+    collisionsEnemy.push_back(std::make_pair(GameTile::Stone, muroMagico));
+
+    //collisions.push_back(std::make_pair(GameTile::Stone, temp));
     backgroundObjectLastNumber++;
+
 }
+/*fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff*/
+
 
 
 void LevelScene::spawnPlayer(const int positionX, const int positionY)
 {
     // spawn player
-
-
-    //player = std::make_unique<Player>(gameManager->getAssetManager()->getTexture(GameTexture::Player), gameManager->getRenderer());
-    //player = std::make_unique<ClasicoPlayer>(gameManager->getAssetManager()->getTexture(GameTexture::Player), gameManager->getRenderer());
     player = dynamic_pointer_cast<Player>(factory->CreatePlayer(positionX, positionY));
-
-    /*player->setPosition(positionX, positionY);
-    player->setSize(scaledTileSize, scaledTileSize);
-    player->setClip(tileSize, tileSize, tileSize * 4, 0);*/
     addObject(player);
 }
 
 void LevelScene::spawnEnemy(GameTexture texture, AIType type, const int positionX, const int positionY)
 {
     std::shared_ptr<Enemy> enemy;
-
     enemy = dynamic_pointer_cast<Enemy>(factory->CreateEnemy(type, positionX, positionY));
-    
-    ////auto enemy = std::make_shared<Enemy>(gameManager->getAssetManager()->getTexture(texture), gameManager->getRenderer());
-    //auto enemy = std::make_shared<ClasicoEnemy>(gameManager->getAssetManager()->getTexture(texture), gameManager->getRenderer());
-    //enemy->setPosition(positionX, positionY);
-    //enemy->setSize(scaledTileSize, scaledTileSize);
-    //enemy->setAIType(type);
     addObject(enemy);
     enemies.push_back(enemy);
 }
 
-/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 void LevelScene::spawnEnemyGhost(GameTexture texture, AIType _type, const int _positionX, const int _positionY)
 {
     auto enemyGhost = std::make_shared<EnemigoFantasma>(gameManager->getAssetManager()->getTexture(GameTexture::EnemyGhost), gameManager->getRenderer());
@@ -304,7 +289,8 @@ void LevelScene::spawnEnemyGhost(GameTexture texture, AIType _type, const int _p
     //enemies.push_back(enemyGhost);
     enemiesGhost.push_back(enemyGhost);
 }
-/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+
 
 void LevelScene::generateEnemies()
 {
@@ -340,7 +326,6 @@ void LevelScene::generateEnemies()
                     fieldPositionX + cellY * scaledTileSize, fieldPositionY + cellX * scaledTileSize);
     }
 
-    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     //iniciando spawn de enemigos fantasma
     for (int i = 0; i < randCount(); i++)
     {
@@ -359,7 +344,6 @@ void LevelScene::generateEnemies()
              randType() == 0 ? AIType::wandering : AIType::chasing,
              fieldPositionX + cellY * scaledTileSize, fieldPositionY + cellX * scaledTileSize);
     }
-    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 }
 
 void LevelScene::spawnBomb(GameGraphicObject* object)
@@ -549,10 +533,7 @@ void LevelScene::update(const unsigned int delta)
     updatePlayerCollision();
     // update collision of enemies
     updateEnemiesCollision();
-
-    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     updateEnemiesGhostCollision();
-    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
     // update collision of bricks
     updateBangsCollision();
@@ -829,7 +810,7 @@ void LevelScene::updateEnemiesCollision()
     for(const auto& enemy : enemies)
     {
         // iterate drawables for collision
-        for(const auto& collisionObject : collisions)
+        for(const auto& collisionObject : collisionsEnemy) //fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
         {
             // check for block collision
             if(isCollisionDetected(enemy->getRect(), collisionObject.second->getRect()))
@@ -878,64 +859,8 @@ void LevelScene::updateEnemiesCollision()
             }
         }
     }
-     //Colisiones de enemigo Fantasma
-    //for (auto i = 0; i<enemies.size();i++)
-    //{
-    //    // iterate drawables for collision
-    //    for (const auto& collisionObject : collisions)
-    //    {
-    //        // check for block collision
-    //        if (isCollisionDetected(enemies[i]->getRect(), collisionObject.second->getRect()))
-    //        {
-    //            if (enemies[i] != enemyGhost) {
-    //                // stop moving on collision detection
-    //                enemies[i]->setMoving(false);
-    //                enemies[i]->revertLastMove();
-    //            }
-    //        }
-    //    }
-    //    // check for bomb collision
-    //    if (bomb && isCollisionDetected(enemies[i]->getRect(), bomb->getRect()))
-    //    {
-    //        // stop moving on collision detection
-    //        enemies[i]->setMoving(false);
-    //        enemies[i]->revertLastMove();
-    //    }
-    //    // check for player collision
-    //    if (player != nullptr)
-    //    {
-    //        // set width to smaller size
-    //        SDL_Rect playerRect = player->getRect();
-    //        playerRect.w = static_cast<int>(playerRect.w * 0.2);
-    //        playerRect.h = static_cast<int>(playerRect.h * 0.2);
-    //        if (isCollisionDetected(playerRect, enemies[i]->getRect()))
-    //        {
-    //            // player killed by enemy
-    //            removeObject(player);
-    //            player = nullptr;
-    //            gameOver();
-    //        }
-    //    }
-    //    if (player != nullptr)
-    //    {
-    //        // can attack?
-    //        if (!enemies[i]->isMovingToCell() && enemies[i]->canAttack())
-    //        {
-    //            // check for attack radius
-    //            if (abs(player->getPositionX() + player->getWidth() / 2 - enemies[i]->getPositionX() -
-    //                enemies[i]->getWidth() / 2) < enemies[i]->getAttackRadius() &&
-    //                abs(player->getPositionY() + player->getHeight() / 2 - enemies[i]->getPositionY() -
-    //                    enemies[i]->getHeight() / 2) < enemies[i]->getAttackRadius())
-    //            {
-    //                // start follow to player
-    //                followToPlayer(enemies[i].get());
-    //            }
-    //        }
-    //    }
-    //}
 }
 
-/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 void LevelScene::updateEnemiesGhostCollision()
 {
      //iterate enemies for collision
@@ -993,7 +918,6 @@ void LevelScene::updateEnemiesGhostCollision()
         }
     }
 }
-/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 void LevelScene::updateBangsCollision()
 {
@@ -1037,7 +961,6 @@ void LevelScene::updateBangsCollision()
             ++itEnemies;
         }
 
-        /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
         auto itEnemiesGhost = enemiesGhost.begin();
         while (itEnemiesGhost != enemiesGhost.end())
         {
@@ -1056,7 +979,6 @@ void LevelScene::updateBangsCollision()
             }
             ++itEnemiesGhost;
         }
-        /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
         // check player
         if(player != nullptr)
@@ -1206,3 +1128,5 @@ bool LevelScene::crearObjetosJuego(string _path)
 
     return false;
 }
+
+

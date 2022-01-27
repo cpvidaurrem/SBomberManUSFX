@@ -27,3 +27,14 @@ std::shared_ptr<GameObject> FactoryGameClasico::CreateEnemy(AIType _type, const 
 
     return dynamic_pointer_cast<GameObject>(enemy);
 }
+
+/*ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff*/
+std::shared_ptr<GameObject> FactoryGameClasico::CreateMuroMagico(const int _positionX, const int _positionY)
+{
+    auto muroMagico = std::make_shared<MuroMagicoClasico>(gameManager->getAssetManager()->getTexture(GameTexture::MuroMagicoClasico), gameManager->getRenderer());
+    muroMagico->setPosition(_positionX, _positionY);
+    muroMagico->setSize(scaledTileSize, scaledTileSize);
+
+    return dynamic_pointer_cast<GameObject>(muroMagico);
+}
+/*ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff*/

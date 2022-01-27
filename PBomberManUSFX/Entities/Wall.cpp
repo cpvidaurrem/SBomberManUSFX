@@ -1,5 +1,5 @@
 #include "Wall.h"
-#include "../Const.h"
+#include "../Const.h""
 
 Wall::Wall(std::shared_ptr<SDL_Texture> _texture, SDL_Renderer* _renderer)
     : GameActor(_texture, _renderer)
@@ -26,7 +26,6 @@ void Wall::update(const unsigned int delta)
 void Wall::render(const SDL_Rect& camera) 
 {
     GameActor::render(camera);
-    std::cout << "Dentro de  Wall" << std::endl;
+    //std::cout << "Dentro de  Wall" << std::endl;
 }
-
 

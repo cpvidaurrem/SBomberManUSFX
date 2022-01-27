@@ -166,6 +166,7 @@
     <ClCompile Include="Entities\GameActor.cpp" />
     <ClCompile Include="Entities\GameGraphicObject.cpp" />
     <ClCompile Include="Entities\GameObject.cpp" />
+    <ClCompile Include="Entities\MuroMagicoCartoon.cpp" />
     <ClCompile Include="Entities\Music.cpp" />
     <ClCompile Include="Entities\PersonalizadoEnemy.cpp" />
     <ClCompile Include="Entities\PersonalizadoPlayer.cpp" />
@@ -190,6 +191,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Managers\AssetManager.cpp" />
     <ClCompile Include="Managers\SceneManager.cpp" />
+    <ClCompile Include="Entities\MuroMagicoClasico.cpp" />
     <ClCompile Include="Scenes\GameLevelScene.cpp" />
     <ClCompile Include="Scenes\GameOverScene.cpp" />
     <ClCompile Include="Scenes\LevelScene.cpp" />
@@ -225,6 +227,7 @@
     <ClInclude Include="Entities\GameActor.h" />
     <ClInclude Include="Entities\GameGraphicObject.h" />
     <ClInclude Include="Entities\GameObject.h" />
+    <ClInclude Include="Entities\MuroMagicoCartoon.h" />
     <ClInclude Include="Entities\Music.h" />
     <ClInclude Include="Entities\PersonalizadoEnemy.h" />
     <ClInclude Include="Entities\PersonalizadoPlayer.h" />
@@ -251,6 +254,7 @@
     <ClInclude Include="GameVersions.h" />
     <ClInclude Include="Managers\AssetManager.h" />
     <ClInclude Include="Managers\SceneManager.h" />
+    <ClInclude Include="Entities\MuroMagicoClasico.h" />
     <ClInclude Include="Scenes\GameLevelScene.h" />
     <ClInclude Include="Scenes\GameOverScene.h" />
     <ClInclude Include="Scenes\LevelScene.h" />
